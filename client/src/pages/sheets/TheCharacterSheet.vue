@@ -130,17 +130,70 @@
               placeholder="A detail about your family life or upbringing."
             ></textarea>
             <CollapsingShelf :show="focus == 'heritageDescription'">
-              <p>
-                Add a detail about your family life or upbringing.
-              </p>
+              <p>Add a detail about your family life or upbringing.</p>
             </CollapsingShelf>
           </div>
-          <code>HERITAGE</code>
-          <code>HERITAGE DESCRIPTION</code>
+
           <!-- Look -->
-          <code>LOOK</code>
+          <div class="input-group">
+            <label for="character-look">Look</label>
+            <input
+              id="character-look"
+              type="text"
+              :value="props.sheet.look"
+              @focus="focus = 'look'"
+              :placeholder="`A plain-looking ${sheet.characterType}${
+                sheet.heritage ? ` from ${sheet.heritage}` : ''
+              }`"
+              @change="
+                changeValue(($event.target as HTMLInputElement)?.value, 'look')
+              "
+            />
+            <CollapsingShelf :show="focus == 'look'">
+              <p>What do you look like?</p>
+              <div class="text-list">
+                <label>Descriptions</label>
+                <button
+                  class="btn btn--text"
+                  v-for="look in codex.looks?.adjectives"
+                  :key="look"
+                  @click="
+                    changeValue(
+                      sheet.look.length
+                        ? sheet.look + ', ' + look.toLowerCase()
+                        : look,
+                      'look'
+                    )
+                  "
+                >
+                  {{ look }}
+                </button>
+              </div>
+              <div class="text-list">
+                <label>Clothes</label>
+                <button
+                  class="btn btn--text"
+                  v-for="look in codex.looks?.clothes"
+                  :key="look"
+                  @click="
+                    changeValue(
+                      sheet.look.length
+                        ? sheet.look + ', ' + look.toLowerCase()
+                        : look,
+                      'look'
+                    )
+                  "
+                >
+                  {{ look }}
+                </button>
+              </div>
+            </CollapsingShelf>
+          </div>
+
+          <!-- Background -->
           <code>BACKGROUND</code>
           <code>BACKGROUND DESCRIPTION</code>
+
           <!-- Crew -->
           <div class="input-group">
             <label>Crew</label>

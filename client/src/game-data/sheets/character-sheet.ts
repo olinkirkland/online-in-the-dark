@@ -16,8 +16,8 @@ export class Character extends Sheet {
   image: string = '';
 
   name: string = 'Unnamed Character';
-  alias: string = 'A Mysterious Stranger';
-  look: string;
+  alias: string = '';
+  look: string = '';
   heritage: string;
   heritageDescription: string;
   background: string;
