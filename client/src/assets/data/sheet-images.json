@@ -1,0 +1,130 @@
+[
+  {
+    "id": "e52f27b1-e5f6-42de-9889-c2d9aeeb3b0d",
+    "name": "Assassin Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/assassins.jpg",
+    "commonColor": "#a27043"
+  },
+  {
+    "id": "ab9c33a6-2710-41ff-a814-edf6b648af54",
+    "name": "Bravos Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/bravos.jpg",
+    "commonColor": "#e88b62"
+  },
+  {
+    "id": "7544b3a4-0e4d-4758-9870-cd5b8f7774cb",
+    "name": "Cult Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/cult.jpg",
+    "commonColor": "#c94c34"
+  },
+  {
+    "id": "13867125-73d8-4399-a550-db499a4eedfe",
+    "name": "Hawkers Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/hawkers.jpg",
+    "commonColor": "#bfa53f"
+  },
+  {
+    "id": "bbc1bf16-dc4d-4e97-a898-0bf9e688d327",
+    "name": "Shadows Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/shadows.jpg",
+    "commonColor": "#a27043"
+  },
+  {
+    "id": "de509b5c-f37c-4975-9768-5e123d24e19b",
+    "name": "Smugglers Crew",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/crews/smugglers.jpg",
+    "commonColor": "#dac684"
+  },
+  {
+    "id": "24fcce82-058a-4ba0-a517-d93167226b7b",
+    "name": "Cutter",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/cutter.jpg",
+    "commonColor": "#d4552a"
+  },
+  {
+    "id": "06c6e50e-b187-4161-99d4-01228ade7b96",
+    "name": "Hound",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/hound.jpg",
+    "commonColor": "#3fbfaf"
+  },
+  {
+    "id": "1b7d14f9-73c8-4b89-88a0-db246cd8b8b4",
+    "name": "Leech",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/leech.jpg",
+    "commonColor": "#708c8e"
+  },
+  {
+    "id": "9cec5287-f247-47ad-8eab-ed6a3ef82b0f",
+    "name": "Lurk",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/lurk.jpg",
+    "commonColor": "#a26a5c"
+  },
+  {
+    "id": "10f1b3a4-b4c3-4755-a66d-17181ba317b2",
+    "name": "Slide",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/slide.jpg",
+    "commonColor": "#a26a5c"
+  },
+  {
+    "id": "1f6e47b6-c3c6-47b9-8b19-e553e6362de2",
+    "name": "Spider",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/spider.jpg",
+    "commonColor": "#ad5151"
+  },
+  {
+    "id": "88a1879b-06a3-4632-897b-e0cd7e423c46",
+    "name": "Whisper",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/whisper.jpg",
+    "commonColor": "#9f825f"
+  },
+  {
+    "id": "9f5d267b-83f1-40e5-9ff6-04d1c92a3d21",
+    "name": "Ghost",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/ghost.jpg",
+    "commonColor": "#718d82"
+  },
+  {
+    "id": "aa5271f0-4d79-4ae7-9348-8bbeae94a27f",
+    "name": "Hull",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/hull.jpg",
+    "commonColor": "#c3a87f"
+  },
+  {
+    "id": "9cec5287-f247-47ad-8eab-ed6a3ef82b0f",
+    "name": "Vampire",
+    "author": "Perryphery",
+    "source": "",
+    "url": "/images/characters/vampire.jpg",
+    "commonColor": "#a67f58"
+  }
+]

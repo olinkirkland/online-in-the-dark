@@ -1,0 +1,42 @@
+[
+  {
+    "id": "791e4a6b-8f2e-41b2-8410-09fdb69d22e2",
+    "name": "Crystal",
+    "author": "Icons8",
+    "source": "https://icons8.com",
+    "url": "/images/portrait-images/icons8-crystal-100.png",
+    "commonColor": "#8E3E63"
+  },
+  {
+    "id": "762c4875-c258-443a-8d88-adeaab82b31c",
+    "name": "Joker",
+    "author": "Icons8",
+    "source": "https://icons8.com",
+    "url": "/images/portrait-images/icons8-joker-100.png",
+    "commonColor": "#D2649A"
+  },
+  {
+    "id": "a1bee44a-c856-4f54-b665-4de8c278d117",
+    "name": "Battle",
+    "author": "Icons8",
+    "source": "https://icons8.com",
+    "url": "/images/portrait-images/icons8-battle-100.png",
+    "commonColor": "#577B8D"
+  },
+  {
+    "id": "7d5f18bc-a32d-4aca-a51d-507b827c8683",
+    "name": "Pawn",
+    "author": "Icons8",
+    "source": "https://icons8.com",
+    "url": "/images/portrait-images/icons8-pawn-100.png",
+    "commonColor": "#40A578"
+  },
+  {
+    "id": "5895f6e3-05b7-42e4-9b5f-19bb3d4ca33e",
+    "name": "Rook",
+    "author": "Icons8",
+    "source": "https://icons8.com",
+    "url": "/images/portrait-images/icons8-rook-100.png",
+    "commonColor": "#A91D3A"
+  }
+]

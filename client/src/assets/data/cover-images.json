@@ -1,0 +1,122 @@
+[
+  {
+    "id": "46c018c0-de33-4bd2-9024-71548b22db7e",
+    "name": "Forest",
+    "author": "Dan Meyers",
+    "source": "https://unsplash.com/photos/tall-trees-wB6B3AqXjy0",
+    "url": "/images/cover-images/forest.jpg",
+    "commonColor": "#8b7d73"
+  },
+  {
+    "id": "9131e281-184e-4e2d-8994-8536f9d3c0d0",
+    "name": "Forest 2",
+    "author": "Simon Berger",
+    "source": "https://unsplash.com/photos/grayscale-photo-of-trees-and-pathway-rydQVdwcgUQ",
+    "url": "/images/cover-images/forest-2.jpg",
+    "commonColor": "#7f7f7f"
+  },
+  {
+    "id": "2e2ec06d-97b4-4cce-b88d-a58c10b8bef8",
+    "name": "Castle",
+    "author": "Cederic Vandenberghe",
+    "source": "https://unsplash.com/photos/closeup-photo-of-castle-with-mist-21DP3hytVHw",
+    "url": "/images/cover-images/castle.jpg",
+    "commonColor": "#3f7690"
+  },
+  {
+    "id": "230ecd94-c69b-4444-a7e2-2585a2652051",
+    "name": "Broadsword",
+    "author": "Jonathan Kemper",
+    "source": "https://unsplash.com/photos/brown-wooden-handle-bar-on-brown-wooden-table-4_ZvmLAeIZk",
+    "url": "/images/cover-images/broadsword.jpg",
+    "commonColor": "#6c4c34"
+  },
+  {
+    "id": "16761f54-5c0c-4f56-8274-f04af8e7f33e",
+    "name": "Warband",
+    "author": "Hasan Almasi",
+    "source": "https://unsplash.com/photos/people-gathering-on-street-during-nighttime-OwqLxCvoVxI",
+    "url": "/images/cover-images/warband.jpg",
+    "commonColor": "#c34e33"
+  },
+  {
+    "id": "8df23582-b58f-4120-b407-528c3d1d1ae8",
+    "name": "Cathedral",
+    "author": "John Towner",
+    "source": "https://unsplash.com/photos/low-angle-photography-of-building-glass-window-pDKoVuXYKxU",
+    "url": "/images/cover-images/cathedral.jpg",
+    "commonColor": "#8f836f"
+  },
+  {
+    "id": "02c928bb-d011-42ee-8722-fd7856e60100",
+    "name": "Ghost Field",
+    "author": "Pawel Czerwinski",
+    "source": "https://unsplash.com/photos/water-splash-in-close-up-photography-BPrk2cOoCq8",
+    "url": "/images/cover-images/ghost-field.jpg",
+    "commonColor": "#5976a5"
+  },
+  {
+    "id": "116bb45e-7ea7-4e81-83fb-5cd7af65794c",
+    "name": "Brightstone",
+    "author": "Rob Jackson",
+    "source": "https://unsplash.com/photos/photo-of-grey-brick-building-_6HuhLHZ1v8",
+    "url": "/images/cover-images/brightstone.jpg",
+    "commonColor": "#4f5fb2"
+  },
+  {
+    "id": "3c2911d4-21da-4af3-a9aa-8fb2a5289300",
+    "name": "Church of Ecstasy",
+    "author": "David Knieradl",
+    "source": "https://unsplash.com/photos/a-set-of-stairs-leading-up-to-a-large-window-TGCDipvrP-I",
+    "url": "/images/cover-images/church-of-ecstasy.jpg",
+    "commonColor": "#5176ad"
+  },
+  {
+    "id": "a4fa66a2-cb5b-4491-9dab-39bc6e49b426",
+    "name": "Alley",
+    "author": "Arno Senoner",
+    "source": "https://unsplash.com/photos/a-cobblestone-street-lined-with-brick-buildings-e0SEn3icqLg",
+    "url": "/images/cover-images/alley.jpg",
+    "commonColor": "#d47f2a"
+  },
+  {
+    "id": "5992a65e-44f1-4d73-b264-37d58dd16d94",
+    "name": "Alley 2",
+    "author": "Morica Pham",
+    "source": "https://unsplash.com/photos/empty-street-between-buildings-during-night-time-kOjoKSyGei4",
+    "url": "/images/cover-images/alley-2.jpg",
+    "commonColor": "#dd8937"
+  },
+  {
+    "id": "272718f9-53ef-41f5-a33f-e96018681d8d",
+    "name": "Flames",
+    "author": "Lucas K",
+    "source": "https://unsplash.com/photos/blue-and-orange-smoke-wQLAGv4_OYs",
+    "url": "/images/cover-images/flames.jpg",
+    "commonColor": "#cc4e34"
+  },
+  {
+    "id": "799aace5-ec2d-4748-a972-8a8b50c6f60c",
+    "name": "Beach",
+    "author": "Kate Rodriguez",
+    "source": "https://unsplash.com/photos/river-overflow-in-between-rock-formation-p3OzJuT_Dks",
+    "url": "/images/cover-images/beach.jpg",
+    "commonColor": "#ab8453"
+  },
+  {
+    "id": "48bbec01-3d2a-4419-a383-428a0d589b04",
+    "name": "Embers",
+    "author": "Andrey Andreyev",
+    "source": "https://unsplash.com/photos/burned-firewood-s20nA2KB1N4",
+    "url": "/images/cover-images/embers.jpg",
+    "commonColor": "#e16f32"
+  },
+  {
+    "id": "332e3040-e8ac-43d8-a3bd-bcd05633fd35",
+    "name": "Spiral Stairs",
+    "author": "Ryan Searle",
+    "source": "https://unsplash.com/photos/twirl-stairs-with-chandeliers-Dqv8VRUKBs0",
+    "url": "/images/cover-images/spiral-stairs.jpg",
+    "commonColor": "#ad6a2e"
+  }
+]
