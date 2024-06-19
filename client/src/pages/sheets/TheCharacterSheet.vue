@@ -358,8 +358,9 @@
         </section>
         <Divider />
         <section>
-          <label for="contacts"> {{ sheet.contactsLabel }} </label>
+          <!-- Contacts -->
           <div class="row">
+            <label for="contacts"> {{ sheet.contactsLabel }} </label>
             <button
               class="btn"
               @click="
@@ -401,8 +402,36 @@
       </div>
       <div>
         <section>
-          <code>STRESS + MAX STRESS</code>
-          <code>TRAUMAS + MAX TRAUMAS</code>
+          <!-- Stress -->
+          <div class="input-group">
+            <label for="stress">
+              Stress
+              <label class="muted">
+                {{ sheet.stress }} / {{ sheet.maxStress }}
+              </label>
+            </label>
+            <CheckboxBar
+              id="stress"
+              :value="props.sheet.stress"
+              :max="props.sheet.maxStress"
+              @change="changeValue($event, 'stress')"
+            />
+          </div>
+
+          <!-- Traumas -->
+          <div class="input-group">
+            <label for="trauma">Trauma</label>
+            <div class="tile-list" v-if="traumas.length > 0">
+              <EffectableTile
+                v-for="trauma in traumas"
+                :key="trauma.id"
+                :effectable="trauma"
+                idPrefix="trauma"
+                :propertyName="'Trauma'"
+                :change="(quantity: number) => onChangeTrauma(trauma, quantity)"
+              />
+            </div>
+          </div>
         </section>
         <Divider />
         <section>
@@ -466,20 +495,22 @@
 </template>
 
 <script setup lang="ts">
-import { Person } from '@/game-data/game-data-types';
-import Sheet from '@/game-data/sheets/sheet';
-import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
-import ModalController from '@/controllers/modal-controller';
-import PersonTile from '@/components/PersonTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
-import { pick } from '@/util/rand-helper';
+import CheckboxBar from '@/components/CheckboxBar.vue';
+import CollapsingShelf from '@/components/CollapsingShelf.vue';
+import EffectableTile from '@/components/EffectableTile.vue';
+import PersonTile from '@/components/PersonTile.vue';
+import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
+import ModalController from '@/controllers/modal-controller';
+import { Person } from '@/game-data/game-data-types';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
-import { defineProps, ref, computed, onMounted, onUnmounted } from 'vue';
+import Sheet from '@/game-data/sheets/sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
-import CollapsingShelf from '@/components/CollapsingShelf.vue';
+import { pick } from '@/util/rand-helper';
+import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps<{
   sheet: Character;
@@ -596,6 +627,28 @@ function onCreateContact(contact: Person) {
       op: 'add',
       path: `/data/sheets/${props.sheet.id}/contacts/-`,
       value: contact
+    }
+  ]);
+}
+
+// Traumas
+const showOnlySelectedTraumas = ref(
+  localStorage.getItem('showOnlySelectedTraumas') === 'true'
+);
+const traumas = computed(() => {
+  return showOnlySelectedTraumas.value
+    ? props.sheet.traumas.filter((t) => t.quantity > 0)
+    : props.sheet.traumas;
+});
+
+function onChangeTrauma(trauma: any, quantity: number) {
+  const traumaIndex = props.sheet.traumas.findIndex((t) => t.id === trauma.id);
+  const path = `/data/sheets/${props.sheet.id}/traumas/${traumaIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
     }
   ]);
 }

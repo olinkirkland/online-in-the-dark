@@ -31,11 +31,11 @@ export class Character extends Sheet {
   contacts: Person[] = [];
   contactsLabel: string = 'Contacts';
 
-  stress: number; // 0-9
-  maxStress: number;
+  stress: number = 0; // 0-9
+  maxStress: number = 9;
 
-  trauma: Effectable[];
-  maxTrauma: number;
+  traumas: Effectable[];
+  maxTraumas: number = 4;
 
   harm: Harm[];
   healingClock: Clock = {
@@ -49,6 +49,70 @@ export class Character extends Sheet {
   constructor() {
     super();
     this.sheetType = 'character';
+    this.traumas = [
+      {
+        id: 'cold',
+        name: 'Cold',
+        description: 'You’re not moved by emotional appeals or social bonds.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'haunted',
+        name: 'Haunted',
+        description:
+          'You’re often lost in reverie, reliving past horrors, seeing things.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'obsessed',
+        name: 'Obsessed',
+        description:
+          'You’re enthralled by one thing: an activity, a person, an ideology.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'paranoid',
+        name: 'Paranoid',
+        description: 'You imagine danger everywhere; you can’t trust others.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'reckless',
+        name: 'Reckless',
+        description:
+          'You have little regard for your own safety or best interests.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'soft',
+        name: 'Soft',
+        description:
+          'You lose your edge; you become sentimental, passive, gentle.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'unstable',
+        name: 'Unstable',
+        description:
+          'Your emotional state is volatile. You can instantly rage, or fall into despair, act impulsively, or freeze up.',
+        quantity: 0,
+        maxQuantity: 1
+      },
+      {
+        id: 'vicious',
+        name: 'Vicious',
+        description:
+          'You seek out opportunities to hurt people, even for no good reason.',
+        quantity: 0,
+        maxQuantity: 1
+      }
+    ];
   }
 }
 
