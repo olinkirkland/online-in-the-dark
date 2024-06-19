@@ -49,11 +49,11 @@ async function incrementVersion() {
   packageJson.version = newVersion;
   fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
   console.log(
-    `Incremented version in package.json from ${oldVersion} to ${newVersion}`
+    `Incremented client version in package.json from ${oldVersion} to ${newVersion}`
   );
 
   await runCommand(
-    `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
+    `git commit -am "Increment client version in package.json from ${oldVersion} to ${newVersion}"`
   );
 
   await runCommand('git push');

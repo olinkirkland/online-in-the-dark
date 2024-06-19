@@ -83,12 +83,12 @@ async function checkAndIncrement() {
     );
 
     await runCommand(
-      `git commit -am "Increment version in package.json from ${oldVersion} to ${newVersion}"`
+      `git commit -am "Increment server version in package.json from ${oldVersion} to ${newVersion}"`
     );
 
     return true;
   } catch (error) {
-    console.error('Error incrementing version:', error);
+    console.error('Error incrementing server version:', error);
     return false;
   }
 }
