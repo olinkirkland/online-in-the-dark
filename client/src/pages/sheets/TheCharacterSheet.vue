@@ -7,6 +7,7 @@
     >
       <div>
         <section>
+          <!-- Title card -->
           <div
             class="character-type-card"
             :style="{
@@ -14,13 +15,83 @@
             }"
           >
             <img :src="getSheetImage(sheet.image)?.url" />
-            <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
+            <h1
+              :class="{
+                'extra-long': sheet.name
+                  .split(' ')
+                  .some((str) => str.length > 8)
+              }"
+            >
               {{ sheet.name }}
             </h1>
             <h2>
               {{ sheet.characterTypeDescription }}
             </h2>
           </div>
+
+          <!-- Name -->
+          <div class="input-group name">
+            <label for="character-name">Name</label>
+            <div class="row flat">
+              <input
+                id="character-name"
+                type="text"
+                :value="props.sheet.name"
+                @focus="focus = 'name'"
+                :placeholder="'Unnamed ' + sheet.characterType"
+                @change="
+                  changeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'name'
+                  )
+                "
+              />
+              <button class="btn btn--icon" @click="randomizeName">
+                <i class="fas fa-random"></i>
+              </button>
+            </div>
+            <CollapsingShelf :show="focus == 'name'">
+              <p>What's your name?</p>
+            </CollapsingShelf>
+          </div>
+
+          <!-- Alias -->
+          <div class="input-group">
+            <label for="character-alias"
+              >Alias
+              <label class="muted">(Optional)</label>
+            </label>
+            <div class="row flat">
+              <input
+                id="character-alias"
+                type="text"
+                :value="props.sheet.alias"
+                @focus="focus = 'alias'"
+                :placeholder="'Alias'"
+                @change="
+                  changeValue(
+                    ($event.target as HTMLInputElement)?.value,
+                    'alias'
+                  )
+                "
+              />
+              <button class="btn btn--icon" @click="randomizeAlias">
+                <i class="fas fa-random"></i>
+              </button>
+            </div>
+
+            <CollapsingShelf :show="focus == 'alias'">
+              <p>The alias or nickname you're known by in the underworld.</p>
+            </CollapsingShelf>
+          </div>
+
+          <!-- Look -->
+          <code>LOOK</code>
+          <code>HERITAGE</code>
+          <code>HERITAGE DESCRIPTION</code>
+          <code>BACKGROUND</code>
+          <code>BACKGROUND DESCRIPTION</code>
+          <!-- Crew -->
           <div class="input-group">
             <label>Crew</label>
             <div class="row wrap">
@@ -42,16 +113,6 @@
               </button>
             </div>
           </div>
-        </section>
-        <Divider />
-        <section>
-          <code>NAME</code>
-          <code>ALIAS</code>
-          <code>LOOK</code>
-          <code>HERITAGE</code>
-          <code>HERITAGE DESCRIPTION</code>
-          <code>BACKGROUND</code>
-          <code>BACKGROUND DESCRIPTION</code>
         </section>
         <Divider />
         <section>
@@ -130,12 +191,14 @@
 </template>
 
 <script setup lang="ts">
+import { pick } from '@/util/rand-helper';
 import { patch } from '@/controllers/game-controller';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
-import { defineProps, ref, computed } from 'vue';
+import { defineProps, ref, computed, onMounted, onUnmounted } from 'vue';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
+import CollapsingShelf from '@/components/CollapsingShelf.vue';
 
 const props = defineProps<{
   sheet: Character;
@@ -147,6 +210,13 @@ const props = defineProps<{
  *
  */
 
+const codex = useGameStore().game?.codex;
+onMounted(() => {
+  document.addEventListener('blur', onBlur, true);
+});
+onUnmounted(() => {
+  document.removeEventListener('blur', onBlur, true);
+});
 const focus = ref();
 function onBlur(event: FocusEvent) {
   if ((event.relatedTarget as HTMLElement)?.closest('.shelf')) return;
@@ -165,11 +235,28 @@ function changeValue(value: any, partialPath: string) {
   ]);
 }
 
+// Crew
 const crewSheets = computed(() => {
   return (
     Object.values(useGameStore().game?.data?.sheets || []) as Sheet[]
   ).filter((sheet) => sheet.sheetType === 'crew') as Crew[];
 });
+
+// Name
+function randomizeName() {
+  const firstNames = codex?.names?.firstNames || [];
+  const lastNames = codex?.names?.lastNames || [];
+  const firstName = pick(firstNames);
+  const lastName = pick(lastNames);
+  changeValue(`${firstName} ${lastName}`, 'name');
+}
+
+// Alias
+function randomizeAlias() {
+  const aliases = codex?.names?.aliases || [];
+  const alias = pick(aliases);
+  changeValue(alias, 'alias');
+}
 
 /**
  *
