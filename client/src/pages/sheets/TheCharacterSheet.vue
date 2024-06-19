@@ -211,7 +211,7 @@
               <div class="text-list">
                 <button
                   class="btn btn--text"
-                  v-for="background in codex.lexicon.backgrounds"
+                  v-for="background in codex.sheets?.character?.backgrounds"
                   :key="background.name"
                   @mousedown="
                     changeValue(background.name, 'background');
@@ -264,10 +264,77 @@
             </div>
           </div>
         </section>
+
         <Divider />
+
         <section>
-          <code>VICE</code>
-          <code>VICE PURVEYOR</code>
+          <!-- Vice -->
+          <div class="input-group">
+            <label for="character-vice">Vice</label>
+            <input
+              id="character-vice"
+              type="text"
+              :value="props.sheet.vice"
+              @focus="focus = 'vice'"
+              :placeholder="'Vice'"
+              @change="
+                changeValue(($event.target as HTMLInputElement)?.value, 'vice')
+              "
+            />
+            <p class="muted" v-if="viceBlurb">
+              {{ viceBlurb }}
+            </p>
+            <CollapsingShelf :show="focus == 'vice'">
+              <p>What vice do you indulge in to relieve stress?</p>
+              <div class="text-list">
+                <button
+                  class="btn btn--text"
+                  v-for="vice in codex.sheets?.character?.vices"
+                  :key="vice.name"
+                  @click="changeValue(vice.name, 'vice')"
+                >
+                  {{ vice.name }}
+                </button>
+              </div>
+            </CollapsingShelf>
+          </div>
+
+          <!-- Vice Purveyor -->
+          <div class="input-group">
+            <label for="character-vice-purveyor">Vice Purveyor</label>
+            <textarea
+              id="character-vice-purveyor"
+              type="text"
+              :value="props.sheet.vicePurveyor"
+              spellcheck="false"
+              @focus="focus = 'vicePurveyor'"
+              :placeholder="'Vice Purveyor'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'vicePurveyor'
+                )
+              "
+            ></textarea>
+            <CollapsingShelf :show="focus == 'vicePurveyor'">
+              <p>Who provides your vice?</p>
+              <div class="text-list">
+                <button
+                  class="btn btn--text"
+                  v-for="purveyor in codex.sheets?.character?.vicePurveyors"
+                  :key="purveyor"
+                  @click="
+                    changeValue(
+                      `${purveyor.name}. ${purveyor.blurb}`,
+                      'vicePurveyor'
+                    )
+                  "
+                >
+                  {{ purveyor.name }}
+                </button>
+              </div>
+            </CollapsingShelf>
+          </div>
         </section>
         <Divider />
         <section>
@@ -407,6 +474,15 @@ function randomizeAlias() {
   const alias = pick(aliases);
   changeValue(alias, 'alias');
 }
+
+// Vice
+const viceBlurb = computed(() => {
+  const vice = codex.sheets?.character?.vices.find(
+    (vice) => vice.name === props.sheet.vice
+  );
+
+  return vice?.blurb;
+});
 
 /**
  *
