@@ -240,6 +240,32 @@
         "name": "Dunslough",
         "blurb": "A labor camp served by convicts and a ghetto for the destitute poor."
       }
+    ],
+    "locations": [
+      {
+        "name": "Akoros",
+        "blurb": "A land of dark, petrified forests and rocky hills. The rich coastal cities get their wealth from leviathan hunting and from mining colonies deep inland. The Akorosi are sometimes called 'Imperials' since the Imperium began there. They are generally fair-skinned and dark-haired."
+      },
+      {
+        "name": "Severos",
+        "blurb": "A land of windswept plains, covered in dark scrub and thorny growths. Outside the Imperial cities on the coast, some native Severosi still live in free tribes, scavenging the death-lands on their ghost-hunting horses. They are generally brown-skinned and dark-haired."
+      },
+      {
+        "name": "Iruvia",
+        "blurb": "A land of black deserts, obsidian mountains, and raging volcanoes. Some say that positions of power are openly held by demons in Iruvia. The people are generally amber-skinned and dark-haired."
+      },
+      {
+        "name": "The Dagger Isles",
+        "blurb": "A tropical archipelago covered in dense jungle growth; now turned dark and twisted from the strange magic of the cataclysm. Some say that the people there live without lightning barriers. How do they manage that? Native islanders are generally copper-skinned and dark-haired."
+      },
+      {
+        "name": "Skovlan",
+        "blurb": "A ragged land of cold mountains and rough tundra. Skovlan was the last holdout against Imperial control. They are generally pale-skinned and fair-haired or red-haired."
+      },
+      {
+        "name": "Tycheros",
+        "blurb": "A far off land, disconnected from the Empire. People say the Tycherosi (rudely called 'Strangers') have demon blood in their lineage."
+      }
     ]
   },
   "names": {

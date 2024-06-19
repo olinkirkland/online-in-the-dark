@@ -81,14 +81,64 @@
             </div>
 
             <CollapsingShelf :show="focus == 'alias'">
-              <p>The alias or nickname you're known by in the underworld.</p>
+              <p>What alias or nickname are you known by in the underworld?</p>
             </CollapsingShelf>
           </div>
 
-          <!-- Look -->
-          <code>LOOK</code>
+          <!-- Heritage -->
+          <div class="input-group">
+            <label for="character-heritage">Heritage</label>
+            <input
+              id="character-heritage"
+              type="text"
+              :value="props.sheet.heritage"
+              @focus="focus = 'heritage'"
+              :placeholder="'Heritage'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'heritage'
+                )
+              "
+            />
+            <CollapsingShelf :show="focus == 'heritage'">
+              <p>You can trace your family line back to this place.</p>
+              <div class="text-list">
+                <button
+                  class="btn btn--text"
+                  v-for="location in codex.lexicon.locations"
+                  :key="location.name"
+                  @mousedown="
+                    changeValue(location.name, 'heritage');
+                    changeValue(location.blurb, 'heritageDescription');
+                  "
+                >
+                  {{ location.name }}
+                </button>
+              </div>
+            </CollapsingShelf>
+            <textarea
+              spellcheck="false"
+              :value="props.sheet.heritageDescription"
+              @focus="focus = 'heritageDescription'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLTextAreaElement)?.value,
+                  'heritageDescription'
+                )
+              "
+              placeholder="A detail about your family life or upbringing."
+            ></textarea>
+            <CollapsingShelf :show="focus == 'heritageDescription'">
+              <p>
+                Add a detail about your family life or upbringing.
+              </p>
+            </CollapsingShelf>
+          </div>
           <code>HERITAGE</code>
           <code>HERITAGE DESCRIPTION</code>
+          <!-- Look -->
+          <code>LOOK</code>
           <code>BACKGROUND</code>
           <code>BACKGROUND DESCRIPTION</code>
           <!-- Crew -->
