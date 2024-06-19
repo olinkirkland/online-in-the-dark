@@ -24,8 +24,9 @@ export class Character extends Sheet {
   backgroundDescription: string;
   notes: string = '';
 
-  vice: string;
-  vicePurveyor: string;
+  vice: string = '';
+  viceDescription: string = '';
+  vicePurveyor: string = '';
 
   stress: number; // 0-9
   maxStress: number;

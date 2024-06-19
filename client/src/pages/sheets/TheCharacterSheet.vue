@@ -281,9 +281,7 @@
                 changeValue(($event.target as HTMLInputElement)?.value, 'vice')
               "
             />
-            <p class="muted" v-if="viceBlurb">
-              {{ viceBlurb }}
-            </p>
+
             <CollapsingShelf :show="focus == 'vice'">
               <p>What vice do you indulge in to relieve stress?</p>
               <div class="text-list">
@@ -291,11 +289,33 @@
                   class="btn btn--text"
                   v-for="vice in codex.sheets?.character?.vices"
                   :key="vice.name"
-                  @click="changeValue(vice.name, 'vice')"
+                  @click="
+                    changeValue(vice.name, 'vice');
+                    changeValue(vice.blurb, 'viceDescription');
+                  "
                 >
                   {{ vice.name }}
                 </button>
               </div>
+            </CollapsingShelf>
+          </div>
+
+          <!-- Vice Description -->
+          <div class="input-group">
+            <textarea
+              spellcheck="false"
+              :value="props.sheet.viceDescription"
+              @focus="focus = 'viceDescription'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLTextAreaElement)?.value,
+                  'viceDescription'
+                )
+              "
+              placeholder="Add a detail about your vice."
+            ></textarea>
+            <CollapsingShelf :show="focus == 'viceDescription'">
+              <p>Add a detail about your Vice.</p>
             </CollapsingShelf>
           </div>
 
@@ -318,10 +338,10 @@
             ></textarea>
             <CollapsingShelf :show="focus == 'vicePurveyor'">
               <p>Who provides your vice?</p>
-              <div class="text-list">
+              <div class="text-list" v-if="vicePurveyors.length">
                 <button
                   class="btn btn--text"
-                  v-for="purveyor in codex.sheets?.character?.vicePurveyors"
+                  v-for="purveyor in vicePurveyors"
                   :key="purveyor"
                   @click="
                     changeValue(
@@ -475,13 +495,11 @@ function randomizeAlias() {
   changeValue(alias, 'alias');
 }
 
-// Vice
-const viceBlurb = computed(() => {
-  const vice = codex.sheets?.character?.vices.find(
-    (vice) => vice.name === props.sheet.vice
+// Vice Purveyors
+const vicePurveyors = computed(() => {
+  return codex.sheets?.character?.vicePurveyors.filter((purveyor) =>
+    purveyor.vices.includes(props.sheet.vice.toLowerCase())
   );
-
-  return vice?.blurb;
 });
 
 /**
