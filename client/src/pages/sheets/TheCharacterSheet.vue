@@ -365,7 +365,7 @@
               @click="
                 ModalController.open(EditPersonModal, {
                   propertyName: 'Person',
-                  idPrefix: sheet.crewType + '-contact',
+                  idPrefix: 'contact',
                   onCreateNew: onCreateContact
                 })
               "
@@ -466,6 +466,8 @@
 </template>
 
 <script setup lang="ts">
+import { Person } from '@/game-data/game-data-types';
+import Sheet from '@/game-data/sheets/sheet';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import ModalController from '@/controllers/modal-controller';
 import PersonTile from '@/components/PersonTile.vue';
@@ -539,7 +541,7 @@ function randomizeAlias() {
 
 // Vice Purveyors
 const vicePurveyors = computed(() => {
-  return codex.sheets?.character?.vicePurveyors.filter((purveyor) =>
+  return codex.sheets?.character?.vicePurveyors.filter((purveyor: any) =>
     purveyor.vices.includes(props.sheet.vice.toLowerCase())
   );
 });
