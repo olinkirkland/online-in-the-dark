@@ -81,12 +81,10 @@ export class ActiveGame {
   }
 
   public applyPatchesAndBroadcast(patches: Operation[]) {
-    if (patches.length === 0) return;
-
     try {
-      // logger.info('Applying patches', {
-      //   patches: patches.map((patch) => `[${patch.op}] ${patch.path}`)
-      // });
+      logger.info('Applying patches', {
+        patches: patches.map((patch) => `[${patch.op}] ${patch.path}`)
+      });
 
       this.state = applyPatch(this.state, patches).newDocument;
 
@@ -109,6 +107,7 @@ export class ActiveGame {
   }
 
   public applyPatchQueueAndBroadcast() {
+    if (this.patchQueue.length === 0) return;
     this.applyPatchesAndBroadcast(this.patchQueue);
     this.patchQueue = [];
   }

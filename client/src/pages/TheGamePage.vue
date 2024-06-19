@@ -117,7 +117,7 @@ const route = useRoute();
 
 const isLoading = computed(() => !useGameStore().game?.codex);
 
-const sheetType = ref('crew');
+const sheetType = ref('character');
 const sheets = computed(() => {
   return Object.values(useGameStore().game?.data?.sheets || []) as Sheet[];
 });

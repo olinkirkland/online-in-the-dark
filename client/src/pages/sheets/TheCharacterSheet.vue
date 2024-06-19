@@ -7,68 +7,99 @@
     >
       <div>
         <section>
-          <h1>CHARACTER TYPE CARD (IMAGE)</h1>
-          <h1>CHARACTER TYPE</h1>
-          <h1>CHARACTER TYPE DESCRIPTION</h1>
-          <h1>CREW</h1>
+          <div
+            class="character-type-card"
+            :style="{
+              backgroundColor: getSheetImage(sheet.image)?.commonColor
+            }"
+          >
+            <img :src="getSheetImage(sheet.image)?.url" />
+            <h1 :class="{ 'extra-long': sheet.name.length > 20 }">
+              {{ sheet.name }}
+            </h1>
+            <h2>
+              {{ sheet.characterTypeDescription }}
+            </h2>
+          </div>
+          <div class="input-group">
+            <label>Crew</label>
+            <div class="row wrap">
+              <button
+                class="btn btn--tab mobile-full-width"
+                @click="changeValue(null, 'crewId')"
+                :class="{ active: sheet.crewId === null }"
+              >
+                None
+              </button>
+              <button
+                class="btn btn--tab mobile-full-width"
+                v-for="crew in crewSheets"
+                :key="crew.id"
+                :class="{ active: sheet.crewId === crew.id }"
+                @click="changeValue(crew.id, 'crewId')"
+              >
+                {{ crew.name }}
+              </button>
+            </div>
+          </div>
         </section>
         <Divider />
         <section>
-          <h1>NAME</h1>
-          <h1>ALIAS</h1>
-          <h1>LOOK</h1>
-          <h1>HERITAGE</h1>
-          <h1>HERITAGE DESCRIPTION</h1>
-          <h1>BACKGROUND</h1>
-          <h1>BACKGROUND DESCRIPTION</h1>
+          <code>NAME</code>
+          <code>ALIAS</code>
+          <code>LOOK</code>
+          <code>HERITAGE</code>
+          <code>HERITAGE DESCRIPTION</code>
+          <code>BACKGROUND</code>
+          <code>BACKGROUND DESCRIPTION</code>
         </section>
         <Divider />
         <section>
-          <h1>VICE</h1>
-          <h1>VICE PURVEYOR</h1>
+          <code>VICE</code>
+          <code>VICE PURVEYOR</code>
         </section>
         <Divider />
         <section>
-          <h1>CONTACTS</h1>
+          <code>CONTACTS</code>
         </section>
       </div>
       <div>
         <section>
-          <h1>STRESS + MAX STRESS</h1>
-          <h1>TRAUMAS + MAX TRAUMAS</h1>
+          <code>STRESS + MAX STRESS</code>
+          <code>TRAUMAS + MAX TRAUMAS</code>
         </section>
         <Divider />
         <section>
-          <h1>HARMS</h1>
-          <h1>HEALING</h1>
-          <h1>ARMORS</h1>
+          <code>HARMS</code>
+          <code>HEALING</code>
+          <code>ARMORS</code>
         </section>
         <Divider />
         <section>
-          <h1>PLAYBOOK XP</h1>
-          <h1>SPECIAL ABILITIES</h1>
+          <code>PLAYBOOK XP</code>
+          <code>SPECIAL ABILITIES</code>
         </section>
         <Divider />
         <section>
-          <h1>INSIGHT XP</h1>
-          <h1>HUNT, STUDY, SURVEY, TINKER</h1>
+          <code>INSIGHT XP</code>
+          <code>HUNT, STUDY, SURVEY, TINKER</code>
         </section>
         <Divider />
         <section>
-          <h1>PROWESS XP</h1>
-          <h1>FINESSE, PROWL, SKIRMISH, WRECK</h1>
+          <code>PROWESS XP</code>
+          <code>FINESSE, PROWL, SKIRMISH, WRECK</code>
         </section>
         <Divider />
         <section>
-          <h1>RESOLVE XP</h1>
-          <h1>ATTUNE, COMMAND, CONSORT, SWAY</h1>
+          <code>RESOLVE XP</code>
+          <code>ATTUNE, COMMAND, CONSORT, SWAY</code>
         </section>
       </div>
       <div>
         <section>
-          <h1>LOAD</h1>
-          <h1>UNIQUE ITEMS</h1>
-          <h1>STANDARD ITEMS</h1>
+          <code>LOAD</code>
+          <code>UNIQUE ITEMS</code>
+          <code>STANDARD ITEMS</code>
         </section>
       </div>
     </div>
@@ -101,7 +132,10 @@
 <script setup lang="ts">
 import { patch } from '@/controllers/game-controller';
 import { Character } from '@/game-data/sheets/character-sheet';
-import { defineProps, ref } from 'vue';
+import { Crew } from '@/game-data/sheets/crew-sheet';
+import { defineProps, ref, computed } from 'vue';
+import { getSheetImage } from '@/game-data/sheets/sheet-util';
+import { useGameStore } from '@/stores/game-store';
 
 const props = defineProps<{
   sheet: Character;
@@ -112,6 +146,7 @@ const props = defineProps<{
  * Functionality & Sheet API
  *
  */
+
 const focus = ref();
 function onBlur(event: FocusEvent) {
   if ((event.relatedTarget as HTMLElement)?.closest('.shelf')) return;
@@ -129,6 +164,12 @@ function changeValue(value: any, partialPath: string) {
     }
   ]);
 }
+
+const crewSheets = computed(() => {
+  return (
+    Object.values(useGameStore().game?.data?.sheets || []) as Sheet[]
+  ).filter((sheet) => sheet.sheetType === 'crew') as Crew[];
+});
 
 /**
  *
@@ -157,12 +198,14 @@ function scrollToIndex(index: number) {
 </script>
 
 <style scoped lang="scss">
-h1 {
+/** TEMPORARY */
+code {
   color: yellow;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
 }
 
+/** LAYOUT */
 .sheet-layout__nested {
   height: 100%;
   display: flex;
@@ -197,6 +240,69 @@ h1 {
   }
 }
 
+/** TITLE CARD */
+.character-type-card {
+  position: relative;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border-radius: 5px;
+  height: 24rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  .input-group {
+    margin-top: 2rem;
+    gap: 0;
+    label {
+      color: var(--primary);
+      text-align: center;
+    }
+  }
+
+  > h1,
+  h2,
+  p {
+    z-index: 1;
+    color: var(--light);
+  }
+
+  h1 {
+    font-size: 4rem;
+    line-height: 1;
+    overflow: hidden;
+    text-align: center;
+    margin: 0.8rem;
+  }
+
+  h1.extra-long {
+    font-size: 3.2rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    opacity: 0.6;
+    text-align: center;
+  }
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    z-index: 0;
+    filter: brightness(0.6);
+  }
+}
+
+/** MOBILE NAVIGATION */
 .mobile-nav {
   display: none;
 
