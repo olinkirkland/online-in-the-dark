@@ -1,2 +1,0 @@
-# BitD VTT
-
