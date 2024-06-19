@@ -137,7 +137,7 @@
           <!-- Look -->
           <div class="input-group">
             <label for="character-look">Look</label>
-            <input
+            <textarea
               id="character-look"
               type="text"
               :value="props.sheet.look"
@@ -148,7 +148,7 @@
               @change="
                 changeValue(($event.target as HTMLInputElement)?.value, 'look')
               "
-            />
+            ></textarea>
             <CollapsingShelf :show="focus == 'look'">
               <p>What do you look like?</p>
               <div class="text-list">
@@ -191,8 +191,55 @@
           </div>
 
           <!-- Background -->
-          <code>BACKGROUND</code>
-          <code>BACKGROUND DESCRIPTION</code>
+          <div class="input-group">
+            <label for="character-background">Background</label>
+            <input
+              id="character-background"
+              type="text"
+              :value="props.sheet.background"
+              @focus="focus = 'background'"
+              :placeholder="'Background'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLInputElement)?.value,
+                  'background'
+                )
+              "
+            />
+            <CollapsingShelf :show="focus == 'background'">
+              <p>What did you do before you joined the crew?</p>
+              <div class="text-list">
+                <button
+                  class="btn btn--text"
+                  v-for="background in codex.lexicon.backgrounds"
+                  :key="background.name"
+                  @mousedown="
+                    changeValue(background.name, 'background');
+                    changeValue(background.blurb, 'backgroundDescription');
+                  "
+                >
+                  {{ background.name }}
+                </button>
+              </div>
+            </CollapsingShelf>
+          </div>
+          <div class="input-group">
+            <textarea
+              spellcheck="false"
+              :value="props.sheet.backgroundDescription"
+              @focus="focus = 'backgroundDescription'"
+              @change="
+                changeValue(
+                  ($event.target as HTMLTextAreaElement)?.value,
+                  'backgroundDescription'
+                )
+              "
+              placeholder="E.g. Sailor, mutineer, former Bluecoat, smuggler, courtier, street urchin, gang member, etc."
+            ></textarea>
+            <CollapsingShelf :show="focus == 'backgroundDescription'">
+              <p>Add a detail about your past life or career.</p>
+            </CollapsingShelf>
+          </div>
 
           <!-- Crew -->
           <div class="input-group">
