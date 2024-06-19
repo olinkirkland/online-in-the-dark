@@ -358,7 +358,46 @@
         </section>
         <Divider />
         <section>
-          <code>CONTACTS</code>
+          <label for="contacts"> {{ sheet.contactsLabel }} </label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditPersonModal, {
+                  propertyName: 'Person',
+                  idPrefix: sheet.crewType + '-contact',
+                  onCreateNew: onCreateContact
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              icon="fa-low-vision"
+              v-model="showOnlySelectedContacts"
+              label="Show only selected"
+            />
+          </div>
+          <div class="tile-list tile-list--mini" v-if="contacts.length > 0">
+            <PersonTile
+              v-for="contact in contacts"
+              :key="contact.id"
+              :idPrefix="props.sheet.characterType + '-contact'"
+              :propertyName="sheet.contactsLabel"
+              :person="contact"
+              :change="onChangeContact"
+              :onEdit="onEditContact"
+              :onDelete="onDeleteContact"
+              :options="[
+                // thumbs up/down
+                { value: -1, icon: 'fas fa-thumbs-down' },
+                { value: 1, icon: 'fas fa-thumbs-up' }
+              ]"
+            />
+          </div>
+          <p v-if="contacts.length == 0" class="no-tiles">
+            <em>❖ No {{ sheet.contactsLabel }}</em>
+          </p>
         </section>
       </div>
       <div>
@@ -428,6 +467,10 @@
 </template>
 
 <script setup lang="ts">
+import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
+import ModalController from '@/controllers/modal-controller';
+import PersonTile from '@/components/PersonTile.vue';
+import Checkbox from '@/components/Checkbox.vue';
 import { pick } from '@/util/rand-helper';
 import { patch } from '@/controllers/game-controller';
 import { Character } from '@/game-data/sheets/character-sheet';
@@ -501,6 +544,60 @@ const vicePurveyors = computed(() => {
     purveyor.vices.includes(props.sheet.vice.toLowerCase())
   );
 });
+
+// Contacts
+const showOnlySelectedContacts = ref(
+  localStorage.getItem('showOnlySelectedContacts') === 'true'
+);
+const contacts = computed(() => {
+  return showOnlySelectedContacts.value
+    ? props.sheet.contacts.filter((a) => a.attitude !== 0)
+    : props.sheet.contacts;
+});
+
+function onEditContact(contact: Person) {
+  const contactIndex = props.sheet.contacts.findIndex(
+    (a) => a.id === contact.id
+  );
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/contacts/${contactIndex}`,
+      value: contact
+    }
+  ]);
+}
+function onDeleteContact(id: string) {
+  const contactIndex = props.sheet.contacts.findIndex((a) => a.id === id);
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/contacts/${contactIndex}`
+    }
+  ]);
+}
+function onChangeContact(contact: Person, attitude: number) {
+  const contactIndex = props.sheet.contacts.findIndex(
+    (a) => a.id === contact.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/contacts/${contactIndex}/attitude`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: attitude
+    }
+  ]);
+}
+function onCreateContact(contact: Person) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/contacts/-`,
+      value: contact
+    }
+  ]);
+}
 
 /**
  *

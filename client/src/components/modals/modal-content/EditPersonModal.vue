@@ -2,27 +2,30 @@
   <ModalFrame>
     <template v-slot:header>
       <ModalHeader closeButton>
-        <h2>{{ props.onCreateNew ? 'Create a new' : 'Edit' }} {{ propertyName }}</h2>
+        <h2>
+          {{ props.onCreateNew ? 'Create a new' : 'Edit' }} {{ propertyName }}
+        </h2>
       </ModalHeader>
     </template>
     <template v-slot:content>
       <div class="edit">
         <div class="input-group">
           <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            v-model="person.name"
-            placeholder="Enter a memorable name"
-            @input="updateIdFromName(person.name)"
-            @focus="focus = 'name'"
-          />
-          <CollapsingShelf :show="focus === 'name'">
-            <p>Choose a name.</p>
+          <div class="row flat">
+            <input
+              type="text"
+              id="name"
+              v-model="person.name"
+              placeholder="Enter a memorable name"
+              @input="updateIdFromName(person.name)"
+              @focus="focus = 'name'"
+            />
             <button class="btn btn--icon" @mousedown="randomizeName">
               <i class="fas fa-random"></i>
-              <span>Randomize</span>
             </button>
+          </div>
+          <CollapsingShelf :show="focus === 'name'">
+            <p>Choose a name.</p>
           </CollapsingShelf>
         </div>
 

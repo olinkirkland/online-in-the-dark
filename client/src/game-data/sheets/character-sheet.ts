@@ -1,4 +1,4 @@
-import { Clock, Effectable } from '../game-data-types';
+import { Clock, Effectable, Person } from '../game-data-types';
 import Sheet from './sheet';
 
 export type Harm = {
@@ -27,6 +27,9 @@ export class Character extends Sheet {
   vice: string = '';
   viceDescription: string = '';
   vicePurveyor: string = '';
+
+  contacts: Person[] = [];
+  contactsLabel: string = 'Contacts';
 
   stress: number; // 0-9
   maxStress: number;
