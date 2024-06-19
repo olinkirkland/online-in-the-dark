@@ -389,7 +389,6 @@
               :onEdit="onEditContact"
               :onDelete="onDeleteContact"
               :options="[
-                // thumbs up/down
                 { value: -1, icon: 'fas fa-thumbs-down' },
                 { value: 1, icon: 'fas fa-thumbs-up' }
               ]"
