@@ -67,8 +67,9 @@ export class Character extends Sheet {
   ];
   healingClock: Clock = {
     id: 'healing',
-    name: 'healing',
-    description: '',
+    name: '',
+    description:
+      'Roll **Tinker** for a PC with the *Physicker* Special Ability or the *Quality Level* of an NPC) and then mark a number of segments on your Healing clock.\n\n❖ 1-3: one segment\n❖ 4/5: two segments\n❖ 6: three segments\n❖ Critical: five segments',
     segments: 4,
     value: 0
   };

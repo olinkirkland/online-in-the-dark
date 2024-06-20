@@ -359,8 +359,8 @@
         <Divider />
         <section>
           <!-- Contacts -->
+          <label for="contacts"> {{ sheet.contactsLabel }} </label>
           <div class="row">
-            <label for="contacts"> {{ sheet.contactsLabel }} </label>
             <button
               class="btn"
               @click="
@@ -461,26 +461,29 @@
             />
           </div>
           <label> Healing </label>
-          <!-- <Clock :clock="sheet.healingClock" /> -->
+          <Clock
+            :clock="sheet.healingClock"
+            :change="((value: number) => changeValue(value, 'healingClock/value'))"
+          />
 
           <label> Armors </label>
           <Checkbox
             icon="fa-shield-alt"
             v-model="sheet.armorUsed"
             label="Armor"
-            @change="changeValue($event, 'armorUsed')"
+            @update:modelValue="changeValue($event, 'armorUsed')"
           />
           <Checkbox
             icon="fa-shield-alt"
             v-model="sheet.heavyArmorUsed"
             label="Heavy"
-            @change="changeValue($event, 'heavyArmorUsed')"
+            @update:modelValue="changeValue($event, 'heavyArmorUsed')"
           />
           <Checkbox
             icon="fa-shield-alt"
             v-model="sheet.specialArmorUsed"
             label="Special"
-            @change="changeValue($event, 'specialArmorUsed')"
+            @update:modelValue="changeValue($event, 'specialArmorUsed')"
           />
         </section>
         <Divider />
@@ -541,6 +544,7 @@
 <script setup lang="ts">
 import Checkbox from '@/components/Checkbox.vue';
 import CheckboxBar from '@/components/CheckboxBar.vue';
+import Clock from '@/components/Clock.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import HarmTile from '@/components/HarmTile.vue';
