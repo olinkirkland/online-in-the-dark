@@ -407,7 +407,7 @@
             <label for="stress">
               Stress
               <label class="muted">
-                {{ sheet.stress }} / {{ sheet.maxStress }}
+                {{ sheet.stress }} / {{ maxStress }}
               </label>
             </label>
             <CheckboxBar
@@ -420,7 +420,18 @@
 
           <!-- Traumas -->
           <div class="input-group">
-            <label for="trauma">Trauma</label>
+            <label for="trauma"
+              >Trauma
+              <label class="muted">
+                {{ traumas.filter((t) => t.quantity > 0).length }} /
+                {{ maxTraumas }}
+              </label>
+            </label>
+            <Checkbox
+              icon="fa-low-vision"
+              v-model="showOnlySelectedTraumas"
+              label="Show only selected"
+            />
             <div class="tile-list" v-if="traumas.length > 0">
               <EffectableTile
                 v-for="trauma in traumas"
@@ -431,6 +442,9 @@
                 :change="(quantity: number) => onChangeTrauma(trauma, quantity)"
               />
             </div>
+            <p v-if="traumas.length == 0" class="no-tiles">
+              <em>❖ No Traumas</em>
+            </p>
           </div>
         </section>
         <Divider />
@@ -554,6 +568,12 @@ const crewSheets = computed(() => {
   ).filter((sheet) => sheet.sheetType === 'crew') as Crew[];
 });
 
+const crew = computed(() => {
+  return (
+    crewSheets.value.find((crew) => crew.id === props.sheet.crewId) || null
+  );
+});
+
 // Name
 function randomizeName() {
   const firstNames = codex?.names?.firstNames || [];
@@ -631,6 +651,13 @@ function onCreateContact(contact: Person) {
   ]);
 }
 
+// Stress
+const maxStress = computed(() => {
+  const baseMaxStress = props.sheet.maxStress;
+  // TODO: Apply effects from crew
+  return baseMaxStress;
+});
+
 // Traumas
 const showOnlySelectedTraumas = ref(
   localStorage.getItem('showOnlySelectedTraumas') === 'true'
@@ -652,6 +679,12 @@ function onChangeTrauma(trauma: any, quantity: number) {
     }
   ]);
 }
+
+const maxTraumas = computed(() => {
+  const baseMaxTraumas = props.sheet.maxTraumas;
+  // TODO: Apply effects from crew
+  return baseMaxTraumas;
+});
 
 /**
  *

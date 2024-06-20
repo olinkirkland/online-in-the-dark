@@ -53,7 +53,7 @@ export class Character extends Sheet {
       {
         id: 'cold',
         name: 'Cold',
-        description: 'You’re not moved by emotional appeals or social bonds.',
+        description: "You're not moved by emotional appeals or social bonds.",
         quantity: 0,
         maxQuantity: 1
       },
@@ -61,7 +61,7 @@ export class Character extends Sheet {
         id: 'haunted',
         name: 'Haunted',
         description:
-          'You’re often lost in reverie, reliving past horrors, seeing things.',
+          "You're often lost in reverie, reliving past horrors, seeing things.",
         quantity: 0,
         maxQuantity: 1
       },
@@ -69,14 +69,14 @@ export class Character extends Sheet {
         id: 'obsessed',
         name: 'Obsessed',
         description:
-          'You’re enthralled by one thing: an activity, a person, an ideology.',
+          "You're enthralled by one thing: an activity, a person, an ideology.",
         quantity: 0,
         maxQuantity: 1
       },
       {
         id: 'paranoid',
         name: 'Paranoid',
-        description: 'You imagine danger everywhere; you can’t trust others.',
+        description: "You imagine danger everywhere; you can't trust others.",
         quantity: 0,
         maxQuantity: 1
       },
