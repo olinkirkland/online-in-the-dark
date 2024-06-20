@@ -10,7 +10,6 @@
       "
     />
     <h3>Level {{ props.harm.level }}</h3>
-    <p class="muted" v-html="text(props.harm.effectDescription)"></p>
   </div>
 </template>
 

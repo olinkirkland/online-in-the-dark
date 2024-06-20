@@ -4,7 +4,6 @@ import Sheet from './sheet';
 export type Harm = {
   level: number; // 0-4
   description: string;
-  effectDescription: string;
 };
 
 export class Character extends Sheet {
@@ -40,31 +39,27 @@ export class Character extends Sheet {
 
   harms: Harm[] = [
     {
-      level: 1,
-      description: '',
-      effectDescription: 'Less Effect'
-    },
-    {
-      level: 1,
-      description: '',
-      effectDescription: 'Less Effect'
-    },
-    {
-      level: 2,
-      description: '',
-      effectDescription: '[/dice -1]'
-    },
-    {
-      level: 2,
-      description: '',
-      effectDescription: '[/dice -1]'
-    },
-    {
       level: 3,
-      description: '',
-      effectDescription: 'Need help'
+      description: ''
+    },
+    {
+      level: 2,
+      description: ''
+    },
+    {
+      level: 2,
+      description: ''
+    },
+    {
+      level: 1,
+      description: ''
+    },
+    {
+      level: 1,
+      description: ''
     }
   ];
+
   healingClock: Clock = {
     id: 'healing',
     name: '',
@@ -77,6 +72,119 @@ export class Character extends Sheet {
   armorUsed: boolean = false;
   heavyArmorUsed: boolean = false;
   specialArmorUsed: boolean = false;
+
+  playbookXP: number = 0;
+  insightXP: number = 0;
+  prowessXP: number = 0;
+  resolveXP: number = 0;
+
+  attrAttune = {
+    id: 'attr-attune',
+    name: 'Attune',
+    description:
+      'Attune to spirits and the ghost field; channel electroplasmic energy; perceive and communicate with ghosts; understand spectrology.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrCommand = {
+    id: 'attr-command',
+    name: 'Command',
+    description:
+      "Command obedience with your force of personality; intimidate or threaten; lead an action with one of the crew's gangs.",
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrConsort = {
+    id: 'attr-consort',
+    name: 'Consort',
+    description:
+      'Consort with connections from your heritage, background, friends, or rivals to gain access to resources, information, people, or places.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrFinesse = {
+    id: 'attr-finesse',
+    name: 'Finesse',
+    description:
+      "Finesse an item from someone's pocket; employ subtle misdirection or sleight-of-hand; handle a vehicle or a mount.",
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrHunt = {
+    id: 'attr-hunt',
+    name: 'Hunt',
+    description:
+      'Hunt a target; gather information about its location and movements; attack with precision shooting from a distance.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrProwl = {
+    id: 'attr-prowl',
+    name: 'Prowl',
+    description:
+      'Prowl about unseen and traverse obstacles; climb, swim, run, jump, and tumble. Ambush with close violence—a backstab, throat cutting, black-jack, etc.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrSkirmish = {
+    id: 'attr-skirmish',
+    name: 'Skirmish',
+    description:
+      'Skirmish with an opponent in close combat; assault or hold a position; brawl and wrestle.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrStudy = {
+    id: 'attr-study',
+    name: 'Study',
+    description:
+      'Study a person, document, or item with close scrutiny to gather information and apply knowledge; gain a deeper understanding; do research.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrSurvey = {
+    id: 'attr-survey',
+    name: 'Survey',
+    description:
+      "Survey a location or situation to understand what's going on; sense trouble before it happens; gather information about opportunities or exploits.",
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrSway = {
+    id: 'attr-sway',
+    name: 'Sway',
+    description:
+      'Sway someone with charm, logic, deception, disguise, or bluff; change attitudes or behavior with manipulation or seduction.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrTinker = {
+    id: 'attr-tinker',
+    name: 'Tinker',
+    description:
+      'Tinker with mechanisms to create, modify, disable, or repair; disable a trap, pick a lock, or crack a safe. Use the ubiquitous clockwork and electroplasmic devices around the city to your advantage.',
+    quantity: 0,
+    maxQuantity: 4
+  };
+
+  attrWreck = {
+    id: 'attr-wreck',
+    name: 'Wreck',
+    description:
+      'Wreck a place, item, or obstacle with savage force or carefully applied sabotage; breach defenses with force; create distractions and chaos.',
+    quantity: 0,
+    maxQuantity: 4
+  };
 
   constructor() {
     super();

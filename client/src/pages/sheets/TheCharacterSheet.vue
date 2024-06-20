@@ -451,14 +451,59 @@
         <section>
           <label>Harms</label>
           <div class="harms-list">
+            <!-- Level 3 Harm -->
             <HarmTile
-              v-for="(harm, index) in sheet.harms.sort(
-                (a, b) => b.level - a.level
-              )"
-              :key="index"
-              :harm="harm"
-              :changeHarm="(newDescription: string) => changeHarm(index, newDescription)"
+              :key="0"
+              :harm="sheet.harms[0]"
+              :changeHarm="(newDescription: string) => changeHarm(0, newDescription)"
             />
+
+            <p v-if="!sheet.harms[0].description.length">Severe Harm</p>
+            <p class="harm" v-else v-html="'Need help'"></p>
+
+            <!-- Level 2 Harm -->
+            <HarmTile
+              :key="1"
+              :harm="sheet.harms[1]"
+              :changeHarm="(newDescription: string) => changeHarm(1, newDescription)"
+            />
+            <HarmTile
+              :key="2"
+              :harm="sheet.harms[2]"
+              :changeHarm="(newDescription: string) => changeHarm(2, newDescription)"
+            />
+
+            <p
+              v-if="
+                !sheet.harms[1].description.length &&
+                !sheet.harms[2].description.length
+              "
+            >
+              Moderate Harm
+            </p>
+            <p class="harm" v-else v-html="text('[/dice -1]')"></p>
+
+            <!-- Level 1 Harm -->
+            <HarmTile
+              :key="3"
+              :harm="sheet.harms[3]"
+              :changeHarm="(newDescription: string) => changeHarm(3, newDescription)"
+            />
+            <HarmTile
+              :key="4"
+              :harm="sheet.harms[4]"
+              :changeHarm="(newDescription: string) => changeHarm(4, newDescription)"
+            />
+
+            <p
+              v-if="
+                !sheet.harms[3].description.length &&
+                !sheet.harms[4].description.length
+              "
+            >
+              Lesser Harm
+            </p>
+            <p class="harm" v-else v-html="text('Less Effect')"></p>
           </div>
           <label> Healing </label>
           <Clock
@@ -488,23 +533,103 @@
         </section>
         <Divider />
         <section>
-          <code>PLAYBOOK XP</code>
+          <label>Playbook</label>
+          <CheckboxBar
+            :value="props.sheet.playbookXP"
+            :max="8"
+            @change="changeValue($event, 'playbookXP')"
+          />
           <code>SPECIAL ABILITIES</code>
         </section>
         <Divider />
         <section>
-          <code>INSIGHT XP</code>
-          <code>HUNT, STUDY, SURVEY, TINKER</code>
+          <label
+            >Insight
+            <label class="muted">({{ insight }})</label>
+          </label>
+          <CheckboxBar
+            :value="props.sheet.insightXP"
+            :max="6"
+            @change="changeValue($event, 'insightXP')"
+          />
+          <div class="attribute-list">
+            <AttributeTile
+              :effectable="sheet.attrHunt"
+              :change="(quantity: number) => changeValue(quantity, 'attrHunt/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrStudy"
+              :change="(quantity: number) => changeValue(quantity, 'attrStudy/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrSurvey"
+              :change="(quantity: number) => changeValue(quantity, 'attrSurvey/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrTinker"
+              :change="(quantity: number) => changeValue(quantity, 'attrTinker/quantity')"
+            />
+          </div>
         </section>
         <Divider />
         <section>
-          <code>PROWESS XP</code>
-          <code>FINESSE, PROWL, SKIRMISH, WRECK</code>
+          <label
+            >Prowess
+            <label class="muted">({{ prowess }})</label>
+          </label>
+          <CheckboxBar
+            :value="props.sheet.prowessXP"
+            :max="6"
+            @change="changeValue($event, 'prowessXP')"
+          />
+          <div class="attribute-list">
+            <AttributeTile
+              :effectable="sheet.attrFinesse"
+              :change="(quantity: number) => changeValue(quantity, 'attrFinesse/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrProwl"
+              :change="(quantity: number) => changeValue(quantity, 'attrProwl/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrSkirmish"
+              :change="(quantity: number) => changeValue(quantity, 'attrSkirmish/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrWreck"
+              :change="(quantity: number) => changeValue(quantity, 'attrWreck/quantity')"
+            />
+          </div>
         </section>
         <Divider />
         <section>
-          <code>RESOLVE XP</code>
-          <code>ATTUNE, COMMAND, CONSORT, SWAY</code>
+          <label
+            >Resolve
+            <label class="muted">({{ resolve }})</label>
+          </label>
+          <CheckboxBar
+            :value="props.sheet.resolveXP"
+            :max="6"
+            @change="changeValue($event, 'resolveXP')"
+          />
+          <div class="attribute-list">
+            <AttributeTile
+              :effectable="sheet.attrAttune"
+              :change="(quantity: number) => changeValue(quantity, 'attrAttune/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrCommand"
+              :change="(quantity: number) => changeValue(quantity, 'attrCommand/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrConsort"
+              :change="(quantity: number) => changeValue(quantity, 'attrConsort/quantity')"
+            />
+            <AttributeTile
+              :effectable="sheet.attrSway"
+              :change="(quantity: number) => changeValue(quantity, 'attrSway/quantity')"
+            />
+          </div>
         </section>
       </div>
       <div>
@@ -542,6 +667,7 @@
 </template>
 
 <script setup lang="ts">
+import AttributeTile from '@/components/AttributeTile.vue';
 import Checkbox from '@/components/Checkbox.vue';
 import CheckboxBar from '@/components/CheckboxBar.vue';
 import Clock from '@/components/Clock.vue';
@@ -559,6 +685,7 @@ import Sheet from '@/game-data/sheets/sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
+import { text } from '@/util/string';
 import { computed, defineProps, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps<{
@@ -733,6 +860,43 @@ function changeHarm(index: number, newDescription: string) {
   ]);
 }
 
+// Attributes
+const insight = computed(() => {
+  return props.sheet.attrHunt.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrStudy.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrSurvey.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrTinker.quantity > 0
+    ? 1
+    : 0;
+});
+
+const prowess = computed(() => {
+  return props.sheet.attrFinesse.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrProwl.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrSkirmish.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrWreck.quantity > 0
+    ? 1
+    : 0;
+});
+
+const resolve = computed(() => {
+  return props.sheet.attrAttune.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrCommand.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrConsort.quantity > 0
+    ? 1
+    : 0 + props.sheet.attrSway.quantity > 0
+    ? 1
+    : 0;
+});
+
 /**
  *
  * Watch for UI changes
@@ -830,6 +994,30 @@ code {
   > *:first-child {
     grid-column: 1 / -1;
   }
+
+  > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    opacity: 0.6;
+    height: 2rem;
+  }
+
+  > p.harm {
+    opacity: 1;
+    color: var(--red);
+    font-weight: bold;
+    :deep(*) {
+      opacity: 1;
+      color: var(--red);
+    }
+  }
+}
+
+/** ATTRIBUTES */
+.attribute-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
 }
 
 /** TITLE CARD */
