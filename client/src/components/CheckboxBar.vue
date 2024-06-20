@@ -18,9 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineEmits, defineProps, ref, watch } from 'vue';
+import { defineEmits, defineProps, ref, watch } from 'vue';
 import Checkbox from './Checkbox.vue';
-import { useGameStore } from '@/stores/game-store';
 
 const props = defineProps<{
   value: number;

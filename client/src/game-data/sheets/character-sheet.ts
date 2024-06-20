@@ -4,6 +4,7 @@ import Sheet from './sheet';
 export type Harm = {
   level: number; // 0-4
   description: string;
+  effectDescription: string;
 };
 
 export class Character extends Sheet {
@@ -37,7 +38,33 @@ export class Character extends Sheet {
   traumas: Effectable[];
   maxTraumas: number = 4;
 
-  harm: Harm[];
+  harms: Harm[] = [
+    {
+      level: 1,
+      description: '',
+      effectDescription: 'Less Effect'
+    },
+    {
+      level: 1,
+      description: '',
+      effectDescription: 'Less Effect'
+    },
+    {
+      level: 2,
+      description: '',
+      effectDescription: '[/dice -1]'
+    },
+    {
+      level: 2,
+      description: '',
+      effectDescription: '[/dice -1]'
+    },
+    {
+      level: 3,
+      description: '',
+      effectDescription: 'Need help'
+    }
+  ];
   healingClock: Clock = {
     id: 'healing',
     name: 'healing',
@@ -45,6 +72,10 @@ export class Character extends Sheet {
     segments: 4,
     value: 0
   };
+
+  armorUsed: boolean = false;
+  heavyArmorUsed: boolean = false;
+  specialArmorUsed: boolean = false;
 
   constructor() {
     super();

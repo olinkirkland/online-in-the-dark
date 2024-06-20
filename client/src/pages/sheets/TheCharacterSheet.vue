@@ -449,9 +449,39 @@
         </section>
         <Divider />
         <section>
-          <code>HARMS</code>
-          <code>HEALING</code>
-          <code>ARMORS</code>
+          <label>Harms</label>
+          <div class="harms-list">
+            <HarmTile
+              v-for="(harm, index) in sheet.harms.sort(
+                (a, b) => b.level - a.level
+              )"
+              :key="index"
+              :harm="harm"
+              :changeHarm="(newDescription: string) => changeHarm(index, newDescription)"
+            />
+          </div>
+          <label> Healing </label>
+          <!-- <Clock :clock="sheet.healingClock" /> -->
+
+          <label> Armors </label>
+          <Checkbox
+            icon="fa-shield-alt"
+            v-model="sheet.armorUsed"
+            label="Armor"
+            @change="changeValue($event, 'armorUsed')"
+          />
+          <Checkbox
+            icon="fa-shield-alt"
+            v-model="sheet.heavyArmorUsed"
+            label="Heavy"
+            @change="changeValue($event, 'heavyArmorUsed')"
+          />
+          <Checkbox
+            icon="fa-shield-alt"
+            v-model="sheet.specialArmorUsed"
+            label="Special"
+            @change="changeValue($event, 'specialArmorUsed')"
+          />
         </section>
         <Divider />
         <section>
@@ -513,6 +543,7 @@ import Checkbox from '@/components/Checkbox.vue';
 import CheckboxBar from '@/components/CheckboxBar.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
+import HarmTile from '@/components/HarmTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
@@ -524,7 +555,7 @@ import Sheet from '@/game-data/sheets/sheet';
 import { getSheetImage } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
 import { pick } from '@/util/rand-helper';
-import { computed, defineProps, onMounted, onUnmounted, ref } from 'vue';
+import { computed, defineProps, onMounted, onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps<{
   sheet: Character;
@@ -686,6 +717,38 @@ const maxTraumas = computed(() => {
   return baseMaxTraumas;
 });
 
+// Harm
+function changeHarm(index: number, newDescription: string) {
+  const path = `/data/sheets/${props.sheet.id}/harms/${index}/description`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: newDescription
+    }
+  ]);
+}
+
+/**
+ *
+ * Watch for UI changes
+ *
+ */
+
+watch(
+  [showOnlySelectedContacts, showOnlySelectedTraumas],
+  ([showOnlySelectedContacts, showOnlySelectedTraumas]) => {
+    localStorage.setItem(
+      'showOnlySelectedContacts',
+      showOnlySelectedContacts.toString()
+    );
+    localStorage.setItem(
+      'showOnlySelectedTraumas',
+      showOnlySelectedTraumas.toString()
+    );
+  }
+);
+
 /**
  *
  *  Mobile Only
@@ -752,6 +815,16 @@ code {
       flex-direction: column;
       gap: 1rem;
     }
+  }
+}
+
+/** HARMS */
+.harms-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  > *:first-child {
+    grid-column: 1 / -1;
   }
 }
 

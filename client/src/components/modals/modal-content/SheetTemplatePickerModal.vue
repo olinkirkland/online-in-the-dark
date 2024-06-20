@@ -139,10 +139,10 @@ function updateCurrentIndex(carousel: HTMLElement) {
 
   > img {
     position: absolute;
-    left: -1rem;
-    top: -1rem;
-    width: calc(100% + 2rem);
-    height: calc(100% + 2rem);
+    left: -2rem;
+    top: -2rem;
+    width: calc(100% + 4rem);
+    height: calc(100% + 4rem);
     object-fit: cover;
     filter: brightness(0.8);
   }
@@ -210,7 +210,8 @@ function updateCurrentIndex(carousel: HTMLElement) {
       align-items: center;
       .template-card {
         width: 100%;
-        height: calc(100% - 4rem);
+        // height: calc(100% - 4rem);
+        height: 100%;
         transition-property: transform, filter, height;
         transition-duration: 0.3s;
         box-shadow: var(--shadow);
@@ -231,11 +232,11 @@ function updateCurrentIndex(carousel: HTMLElement) {
         }
 
         &.left-of-active {
-          transform: rotateZ(-3deg);
+          transform: rotateZ(-3deg) scale(0.9);
         }
 
         &.right-of-active {
-          transform: rotateZ(3deg);
+          transform: rotateZ(3deg) scale(0.9);
         }
 
         &.active {
