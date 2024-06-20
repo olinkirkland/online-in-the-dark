@@ -78,7 +78,7 @@
         <section class="attribution">
           <p>
             <span class="muted"
-              >© {{ currentYear }} Olin Kirkland | All rights reserved</span
+              >© {{ currentYear }} Olin Kirkland</span
             >
           </p>
           <p>
