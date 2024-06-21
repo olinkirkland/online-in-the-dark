@@ -1555,12 +1555,14 @@ const lockLevel = 99;
 @media (max-width: 1079px) {
   .crew-layout {
     display: flex;
-    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
 
     > div {
       min-width: 100%;
       height: 100%;
       overflow-y: auto;
+      scroll-snap-align: start;
     }
   }
 
