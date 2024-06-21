@@ -70,11 +70,11 @@ function checkboxValuesFromQuantity(quantity: number) {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.4rem;
   background-color: var(--translucent-light);
-  padding: 1.6rem;
-  padding-top: 2.2rem;
-  padding-bottom: 0.8rem;
+  padding: 0.4rem;
   color: var(--light);
   border: 1px solid transparent;
   transition: border 0.2s;
@@ -114,24 +114,7 @@ function checkboxValuesFromQuantity(quantity: number) {
   }
 
   .selection-bar {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
     gap: 0;
-
-    width: fit-content;
-    border-radius: 99px;
-    border: 1px solid transparent;
-
-    &::before {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: var(--darker);
-      border-radius: 99px;
-    }
 
     .checkbox-group {
       padding: 0.6rem 0.4rem;
