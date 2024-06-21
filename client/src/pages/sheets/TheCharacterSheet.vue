@@ -539,7 +539,38 @@
             :max="8"
             @change="changeValue($event, 'playbookXP')"
           />
-          <code>SPECIAL ABILITIES</code>
+          <label>Special Abilities</label>
+          <div class="row">
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditEffectableModal, {
+                  propertyName: 'Special Ability',
+                  idPrefix: sheet.characterType,
+                  onCreateNew: onCreateAbility
+                })
+              "
+            >
+              <span>New</span>
+            </button>
+            <Checkbox
+              icon="fa-low-vision"
+              v-model="showOnlySelectedAbilities"
+              label="Show only selected"
+            />
+          </div>
+          <div class="tile-list">
+            <EffectableTile
+              v-for="ability in specialAbilities"
+              :key="ability.id"
+              :effectable="ability"
+              :propertyName="'Special Ability'"
+              :idPrefix="props.sheet.characterType"
+              :change="(quantity: number) => onChangeAbility(ability, quantity)"
+              :onEdit="onEditAbility"
+              :onDelete="onDeleteAbility"
+            />
+          </div>
         </section>
         <Divider />
         <section>
@@ -675,10 +706,11 @@ import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import HarmTile from '@/components/HarmTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
+import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Person } from '@/game-data/game-data-types';
+import { Effectable, Person } from '@/game-data/game-data-types';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
@@ -897,6 +929,60 @@ const resolve = computed(() => {
     : 0;
 });
 
+// Special Abilities
+const showOnlySelectedAbilities = ref(false);
+const specialAbilities = computed(() => {
+  return showOnlySelectedAbilities.value
+    ? props.sheet.specialAbilities.filter((a) => a.quantity > 0)
+    : props.sheet.specialAbilities;
+});
+
+function onChangeAbility(ability: any, quantity: number) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === ability.id
+  );
+  const path = `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}/quantity`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value: quantity
+    }
+  ]);
+}
+function onEditAbility(ability: Effectable) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === ability.id
+  );
+  patch([
+    {
+      op: 'replace',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}`,
+      value: ability
+    }
+  ]);
+}
+function onDeleteAbility(id: string) {
+  const abilityIndex = props.sheet.specialAbilities.findIndex(
+    (a) => a.id === id
+  );
+  patch([
+    {
+      op: 'remove',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/${abilityIndex}`
+    }
+  ]);
+}
+function onCreateAbility(ability: Effectable) {
+  patch([
+    {
+      op: 'add',
+      path: `/data/sheets/${props.sheet.id}/specialAbilities/-`,
+      value: ability
+    }
+  ]);
+}
+
 /**
  *
  * Watch for UI changes
@@ -1114,5 +1200,12 @@ code {
 
 /** MOBILE */
 @media (max-width: 767px) {
+  section label {
+    text-align: center;
+  }
+
+  .checkbox-bar {
+    margin: 0 auto;
+  }
 }
 </style>

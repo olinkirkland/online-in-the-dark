@@ -62,6 +62,7 @@ function incrementClock() {
     width: 8rem;
     transform: scale(1);
     transition: transform 0.3s;
+    cursor: pointer;
   }
 
   &:active > .slice {
