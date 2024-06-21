@@ -250,6 +250,10 @@ textarea {
   }
 }
 
+.no-gap {
+  gap: 0 !important;
+}
+
 label {
   color: var(--light);
   text-transform: uppercase;

@@ -8,6 +8,7 @@ export default class Sheet {
   createdAt: number; // The timestamp of when the sheet was created
   image: string;
   lockLevel: number;
+  notes: string;
 
   constructor() {
     this.id = uuidv4();

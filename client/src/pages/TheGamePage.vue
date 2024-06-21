@@ -32,10 +32,30 @@
           <i class="fas fa-angle-right"></i>
           <span>{{ currentSheet.name }}</span>
         </h2>
-        <button class="btn btn--icon" @click="onClickDeleteSheet">
-          <i class="fas fa-trash"></i>
-          <span class="mobile-hidden">Delete</span>
-        </button>
+        <div class="row flat no-gap">
+          <button class="btn btn--icon" @click="onClickNotes">
+            <i class="fas fa-sticky-note"></i>
+            <span class="mobile-hidden">Notes</span>
+          </button>
+          <button class="btn btn--icon" @click="onClickDeleteSheet">
+            <i class="fas fa-trash"></i>
+            <span class="mobile-hidden">Delete</span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="sheet-notes"
+        v-if="currentSheet"
+        :class="{ 'show-notes': showNotes }"
+      >
+        <textarea
+          :value="currentSheet?.notes"
+          @change="
+            changeValue(($event.target as HTMLTextAreaElement)?.value, 'notes')
+          "
+          spellcheck="false"
+        ></textarea>
+        <button class="btn btn--text" @click="showNotes = false">Close</button>
       </div>
     </div>
 
@@ -151,6 +171,24 @@ onMounted(() => {
   connectToGame(gameId);
 });
 
+const showNotes = ref(false);
+function onClickNotes() {
+  showNotes.value = !showNotes.value;
+}
+
+function changeValue(value: any, partialPath: string) {
+  if (!currentSheet.value) return console.error('No current sheet');
+  console.log('onChangeValue', value, partialPath);
+  const path = `/data/sheets/${currentSheet.value.id}/${partialPath}`;
+  patch([
+    {
+      op: 'replace',
+      path,
+      value
+    }
+  ]);
+}
+
 function onClickNewSheet() {
   ModalController.open(SheetTemplatePickerModal, {
     sheetType: sheetType.value,
@@ -211,6 +249,36 @@ function onClickDeleteSheet() {
   gap: 0;
 }
 
+.sheet-notes {
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 24rem;
+  padding: 1rem;
+  padding-top: 0 !important;
+  background-color: var(--dark);
+  box-shadow: none;
+  transition: transform 0.3s;
+  transform: translateY(-100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+
+  > textarea {
+    flex: 1;
+    max-height: 100%;
+  }
+
+  &.show-notes {
+    transform: translateY(0);
+    box-shadow: var(--shadow);
+  }
+}
+
 .sheet-select-layout {
   display: flex;
   flex-direction: column;
@@ -257,6 +325,7 @@ button.debug {
   padding: 1rem;
   box-shadow: var(--shadow);
   width: 100%;
+  position: relative;
 
   button.btn.btn--tab {
     text-transform: capitalize;
@@ -310,14 +379,19 @@ ul.sheet-list {
   flex: 1;
   overflow: hidden;
   animation: slideDown 0.3s;
+  z-index: 0;
 }
 
 .controls {
   width: 100%;
+  padding: 0;
+
   > div {
-    animation: fade 0.3s;
+    animation: fade 0.2s;
+    padding: 1rem;
     &.sheet-controls {
       justify-content: space-between;
+      background-color: var(--dark);
     }
   }
   background: var(--dark);
