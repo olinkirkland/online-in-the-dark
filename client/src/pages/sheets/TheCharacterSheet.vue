@@ -665,9 +665,30 @@
       </div>
       <div>
         <section>
-          <code>LOAD</code>
+          <label>Load</label>
+          <div class="row wrap">
+            <button
+              v-for="load in sheet.load"
+              class="btn btn--tab"
+              :class="{ active: load.id === sheet.selectedLoad }"
+              @click="
+                changeValue(
+                  load.id === sheet.selectedLoad ? null : load.id,
+                  'selectedLoad'
+                )
+              "
+            >
+              {{ load.name }}
+              ({{ load.max }}{{ load.id === 'heavy' ? '+' : '' }})
+            </button>
+          </div>
+          <div class="load" v-if="currentLoad">
+            <p class="muted">{{ currentLoad.description }}</p>
+          </div>
           <code>UNIQUE ITEMS</code>
+          <!-- <pre>{{ sheet.uniqueItems }}</pre> -->
           <code>STANDARD ITEMS</code>
+          <!-- <pre>{{ sheet.standardItems }}</pre> -->
         </section>
       </div>
     </div>
@@ -982,6 +1003,40 @@ function onCreateAbility(ability: Effectable) {
     }
   ]);
 }
+
+// Load
+const currentLoad = computed(() => {
+  const load = props.sheet.load.find((l) => l.id === props.sheet.selectedLoad);
+  return load;
+});
+
+const currentLoadUsed = computed(() => {
+  return 1;
+});
+
+const lightLoadMaximum = computed(() => {
+  const baseLightLoad =
+    props.sheet.load.find((l) => l.id === 'light')?.max || 0;
+  return baseLightLoad;
+});
+
+const normalLoadMaximum = computed(() => {
+  const baseNormalLoad =
+    props.sheet.load.find((l) => l.id === 'normal')?.max || 0;
+  return baseNormalLoad;
+});
+
+const heavyLoadMaximum = computed(() => {
+  const baseHeavyLoad =
+    props.sheet.load.find((l) => l.id === 'heavy')?.max || 0;
+  return baseHeavyLoad;
+});
+
+const encumberedLoadMaximum = computed(() => {
+  const baseEncumberedLoad =
+    props.sheet.load.find((l) => l.id === 'encumbered')?.max || 0;
+  return baseEncumberedLoad;
+});
 
 /**
  *

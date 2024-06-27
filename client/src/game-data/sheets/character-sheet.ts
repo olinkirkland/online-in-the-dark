@@ -192,6 +192,32 @@ export class Character extends Sheet {
 
   specialAbilities: Effectable[] = [];
 
+  load = [
+    {
+      id: 'light',
+      name: 'Light',
+      max: 3,
+      description:
+        "You're faster, less conspicuous; you blend in with citizens."
+    },
+    {
+      id: 'normal',
+      name: 'Normal',
+      max: 5,
+      description: 'You look like a scoundrel, ready for trouble.'
+    },
+    {
+      id: 'heavy',
+      name: 'Heavy',
+      max: 6,
+      description: "You're slower. You look like an operative on a mission."
+    }
+  ];
+
+  selectedLoad: string | null = null;
+
+  items: Effectable[] = [];
+
   constructor() {
     super();
     this.sheetType = 'character';
