@@ -665,7 +665,13 @@
       </div>
       <div>
         <section>
-          <label>Load</label>
+          <label
+            >Load
+            <label class="muted"
+              >({{ currentLoadUsed
+              }}{{ currentLoad && '/' + currentLoad.max }})</label
+            >
+          </label>
           <div class="row wrap">
             <button
               v-for="load in sheet.load"
@@ -685,10 +691,10 @@
           <div class="load" v-if="currentLoad">
             <p class="muted">{{ currentLoad.description }}</p>
           </div>
-          <code>UNIQUE ITEMS</code>
-          <!-- <pre>{{ sheet.uniqueItems }}</pre> -->
-          <code>STANDARD ITEMS</code>
-          <!-- <pre>{{ sheet.standardItems }}</pre> -->
+        </section>
+        <Divider />
+        <section>
+          <pre>{{ sheet.items }}</pre>
         </section>
       </div>
     </div>

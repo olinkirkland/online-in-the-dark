@@ -1,4 +1,4 @@
-import { Clock, Effectable, Person } from '../game-data-types';
+import { Clock, Effectable, Item, Person } from '../game-data-types';
 import Sheet from './sheet';
 
 export type Harm = {
@@ -216,7 +216,9 @@ export class Character extends Sheet {
 
   selectedLoad: string | null = null;
 
-  items: Effectable[] = [];
+  items: Item[] = [
+    
+  ];
 
   constructor() {
     super();
