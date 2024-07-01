@@ -162,8 +162,6 @@ function checkboxValuesFromQuantity(quantity: number) {
       bottom: -1px;
       left: -1px;
       right: 1px;
-      background: var(--primary);
-      border-radius: 0 0 99px 99px;
     }
   }
 }

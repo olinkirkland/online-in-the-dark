@@ -217,7 +217,145 @@ export class Character extends Sheet {
   selectedLoad: string | null = null;
 
   items: Item[] = [
-    
+    {
+      id: 'a-blade-or-two',
+      name: 'A Blade or Two',
+      description:
+        "Perhaps you carry a simple fighting knife. Or two curved swords. Or a rapier and stiletto. Or a heavy butcher's cleaver.",
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'throwing-knives',
+      name: 'Throwing Knives',
+      description: 'Six small, light blades.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'a-pistol',
+      name: 'A Pistol',
+      description:
+        'A heavy, single-shot, breech-loading firearm. Devastating at 20 paces, slow to reload.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'a-large-weapon',
+      name: 'A Large Weapon',
+      description:
+        'A weapon meant for two hands. A battle-axe, greatsword, warhammer, or pole-arm. A hunting rifle. A blunderbuss. A bow or crossbow.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 2
+    },
+    {
+      id: 'an-unusual-weapon',
+      name: 'An Unusual Weapon',
+      description:
+        'A curiosity or tool turned into a weapon. A whip, a flail, a hatchet, a shovel, a length of chain, a razor-edged fan, steel-toed boots.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'armor',
+      name: 'Armor',
+      description: 'A thick leather tunic plus reinforced gloves and boots.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 2
+    },
+    {
+      id: 'heavy-armor',
+      name: 'Heavy Armor',
+      description: 'The addition of chain mail, metal plates, a metal helm.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 3
+    },
+    {
+      id: 'burglary-gear',
+      name: 'Burglary Gear',
+      description:
+        'A set of lockpicks. A small pry-bar. Vials of oil to silence squeaky hinges. A coil of wire and fishing hooks. A small pouch of fine sand.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'climbing-gear',
+      name: 'Climbing Gear',
+      description:
+        'A large coil of rope. A small coil of rope. Grappling hooks. A small pouch of chalk dust. A climbing harness with loops and metal rings. A set of iron pitons and a small mallet.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 2
+    },
+    {
+      id: 'documents',
+      name: 'Documents',
+      description:
+        'A collection of slim volumes on a variety of topics, including a registry of the nobility, City Watch commanders, and other notable citizens. Blank pages, a vial of ink, a pen. A number of interesting maps.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'arcane-implements',
+      name: 'Arcane Implements',
+      description:
+        'A vial of quicksilver. A pouch of black salt. A spirit anchor in the form of a small stone. A spirit bottle. A vial of electroplasm, designed to break and splatter on impact.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'subterfuge-supplies',
+      name: 'Subterfuge Supplies',
+      description:
+        "A theatrical make-up kit. A selection of blank documents, ready for the forger's hand. Costume jewelry. A reversible cloak and distinctive hat. A forged badge of office.",
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'demolition-tools',
+      name: 'Demolition Tools',
+      description: 'A sledgehammer and iron spikes. Heavy drill. Crowbar.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 2
+    },
+    {
+      id: 'tinkering-tools',
+      name: 'Tinkering Tools',
+      description:
+        "An assortment for detailed mechanist work: jeweler's loupe, tweezers, a small hammer, pliers, screwdriver, etc.",
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'lantern',
+      name: 'Lantern',
+      description:
+        'A simple oil lantern, a fancy electroplasmic lamp, or other light source.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 1
+    },
+    {
+      id: 'spiritbane-charm',
+      name: 'Spiritbane Charm',
+      description: 'A small arcane trinket that ghosts prefer to avoid.',
+      quantity: 0,
+      maxQuantity: 1,
+      load: 0
+    }
   ];
 
   constructor() {
@@ -455,7 +593,7 @@ export class Hound extends Character {
         id: 'sharpshooter',
         name: 'Sharpshooter',
         description:
-          'You can push yourself to do one of the following: make a ranged attack at extreme distance beyond what’s normal for the weapon—unleash a barrage of rapid fire to suppress the enemy.',
+          "You can push yourself to do one of the following: make a ranged attack at extreme distance beyond what's normal for the weapon—unleash a barrage of rapid fire to suppress the enemy.",
         quantity: 0,
         maxQuantity: 1
       },
@@ -1043,7 +1181,7 @@ export class Whisper extends Character {
         id: 'ghost-mind',
         name: 'Ghost Mind',
         description:
-          'You’re always aware of supernatural entities in your presence. Take +1d when you gather info about the supernatural.',
+          "You're always aware of supernatural entities in your presence. Take +1d when you gather info about the supernatural.",
         quantity: 0,
         maxQuantity: 1
       },

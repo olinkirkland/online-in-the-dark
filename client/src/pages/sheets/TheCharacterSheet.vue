@@ -668,8 +668,8 @@
           <label
             >Load
             <label class="muted"
-              >({{ currentLoadUsed
-              }}{{ currentLoad && '/' + currentLoad.max }})</label
+              >({{ amountOfLoadUsed
+              }}{{ selectedLoad && '/' + selectedLoad.max }})</label
             >
           </label>
           <div class="row wrap">
@@ -687,14 +687,39 @@
               {{ load.name }}
               ({{ load.max }}{{ load.id === 'heavy' ? '+' : '' }})
             </button>
+            <!-- New item -->
+            <button
+              class="btn"
+              @click="
+                ModalController.open(EditItemModal, {
+                  propertyName: 'Item',
+                  idPrefix: 'item',
+                  onCreateNew: onCreateItem
+                })
+              "
+            >
+              New Item
+            </button>
           </div>
-          <div class="load" v-if="currentLoad">
-            <p class="muted">{{ currentLoad.description }}</p>
+          <div class="load" v-if="selectedLoad">
+            <p class="muted">{{ selectedLoad.description }}</p>
           </div>
         </section>
-        <Divider />
         <section>
-          <pre>{{ sheet.items }}</pre>
+          <div class="tile-list" v-if="sheet.items.length > 0">
+            <ItemTile
+              v-for="item in sheet.items"
+              :key="item.id"
+              :item="item"
+              :propertyName="'Item'"
+              idPrefix="item"
+              :onEdit="onEditItem"
+              :change="(quantity: number) => changeItemQuantity(item.id, quantity)"
+            />
+          </div>
+          <p v-if="sheet.items.length == 0" class="no-tiles">
+            <em>❖ No Items</em>
+          </p>
         </section>
       </div>
     </div>
@@ -732,12 +757,14 @@ import Clock from '@/components/Clock.vue';
 import CollapsingShelf from '@/components/CollapsingShelf.vue';
 import EffectableTile from '@/components/EffectableTile.vue';
 import HarmTile from '@/components/HarmTile.vue';
+import ItemTile from '@/components/ItemTile.vue';
 import PersonTile from '@/components/PersonTile.vue';
 import EditEffectableModal from '@/components/modals/modal-content/EditEffectableModal.vue';
+import EditItemModal from '@/components/modals/modal-content/EditItemModal.vue';
 import EditPersonModal from '@/components/modals/modal-content/EditPersonModal.vue';
 import { patch } from '@/controllers/game-controller';
 import ModalController from '@/controllers/modal-controller';
-import { Effectable, Person } from '@/game-data/game-data-types';
+import { Effectable, Item, Person } from '@/game-data/game-data-types';
 import { Character } from '@/game-data/sheets/character-sheet';
 import { Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
@@ -1011,38 +1038,34 @@ function onCreateAbility(ability: Effectable) {
 }
 
 // Load
-const currentLoad = computed(() => {
+const selectedLoad = computed(() => {
   const load = props.sheet.load.find((l) => l.id === props.sheet.selectedLoad);
   return load;
 });
 
-const currentLoadUsed = computed(() => {
-  return 1;
+const amountOfLoadUsed = computed(() => {
+  return props.sheet.items.reduce(
+    (acc, item) => (item.quantity > 0 ? acc + item.load : acc),
+    0
+  );
 });
 
-const lightLoadMaximum = computed(() => {
-  const baseLightLoad =
-    props.sheet.load.find((l) => l.id === 'light')?.max || 0;
-  return baseLightLoad;
-});
+function changeItemQuantity(id: string, quantity: number) {
+  const itemIndex = props.sheet.items.findIndex((i) => i.id === id);
+  const partialPath = `items/${itemIndex}/quantity`;
+  changeValue(quantity, partialPath);
+}
 
-const normalLoadMaximum = computed(() => {
-  const baseNormalLoad =
-    props.sheet.load.find((l) => l.id === 'normal')?.max || 0;
-  return baseNormalLoad;
-});
+function onCreateItem(item: Item) {
+  const partialPath = `items/-`;
+  changeValue(item, partialPath);
+}
 
-const heavyLoadMaximum = computed(() => {
-  const baseHeavyLoad =
-    props.sheet.load.find((l) => l.id === 'heavy')?.max || 0;
-  return baseHeavyLoad;
-});
-
-const encumberedLoadMaximum = computed(() => {
-  const baseEncumberedLoad =
-    props.sheet.load.find((l) => l.id === 'encumbered')?.max || 0;
-  return baseEncumberedLoad;
-});
+function onEditItem(item: Item) {
+  const itemIndex = props.sheet.items.findIndex((i) => i.id === item.id);
+  const partialPath = `items/${itemIndex}`;
+  changeValue(item, partialPath);
+}
 
 /**
  *

@@ -20,11 +20,6 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  &::after {
-    content: '';
-    height: 0.4rem;
-  }
 }
 
 .shelf.show {
