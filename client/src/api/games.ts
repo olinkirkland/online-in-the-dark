@@ -1,3 +1,4 @@
+import mixpanel from 'mixpanel-browser';
 import codexJSON from '@/assets/data/codex.json';
 import { useGameStore } from '@/stores/game-store';
 import { useUserStore } from '@/stores/user-store';
@@ -15,6 +16,7 @@ export async function createNewGame(gameName: string, coverImage: string) {
     if (response.status === HttpStatusCode.Ok) {
       console.log(response.data);
       useUserStore().games = response.data;
+      mixpanel.track('Create Game', { gameName });
       return null;
     }
   } catch (error: any) {

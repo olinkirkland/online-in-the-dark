@@ -129,6 +129,7 @@ import { Crew } from '@/game-data/sheets/crew-sheet';
 import Sheet from '@/game-data/sheets/sheet';
 import { createTemplates } from '@/game-data/sheets/sheet-util';
 import { useGameStore } from '@/stores/game-store';
+import mixpanel from 'mixpanel-browser';
 import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import TheCharacterSheet from './sheets/TheCharacterSheet.vue';
@@ -201,6 +202,11 @@ function onClickNewSheet() {
 
 function createNewSheet(sheetType: string, sheet: Sheet) {
   if (!sheet) return console.error('Sheet not found');
+
+  mixpanel.track('Create Sheet', {
+    sheetType,
+    sheetId: sheet.id
+  });
 
   if (!useGameStore().game?.data?.sheets) {
     // If there's no data yet, create an empty array

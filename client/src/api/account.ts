@@ -4,6 +4,7 @@ import { router } from '@/router';
 import { useGameStore } from '@/stores/game-store';
 import { ForeignUser } from '@/types/user';
 import { HttpStatusCode } from 'axios';
+import mixpanel from 'mixpanel-browser';
 import { useTokenStore } from '../stores/token-store';
 import { useUserStore } from '../stores/user-store';
 import { server } from './connection';
@@ -32,6 +33,7 @@ export async function registerAccount(username?: string, password?: string) {
     console.log('response:', response);
     if (response.status !== HttpStatusCode.Ok) return response.data;
     console.log('@account.ts: fetchMyAccount() because of registerAccount');
+    mixpanel.track('Register Account', { username });
     await fetchMyAccount();
     return null;
   } catch (error: any) {
@@ -50,6 +52,7 @@ export async function login(username: string, password: string) {
       useTokenStore().storeRefreshToken(response.data.refreshToken);
       useTokenStore().accessToken = response.data.accessToken;
       console.log('@account.ts: fetchMyAccount() because of login');
+      mixpanel.track('Login', { username });
       await fetchMyAccount();
     }
 
