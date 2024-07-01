@@ -543,6 +543,56 @@ export class Cutter extends Character {
         maxQuantity: 3
       }
     ];
+
+    const cutterItems: Item[] = [
+      {
+        id: 'fine-hand-weapon',
+        name: 'Fine Hand Weapon',
+        description:
+          'A finely crafted one-handed melee weapon of your choice. Is this a well-crafted standard weapon, like a perfectly-balanced dagger, or something exotic, like an Iruvian dueling saber or a metal-banded war-club?',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'fine-heavy-weapon',
+        name: 'Fine Heavy Weapon',
+        description:
+          'A finely crafted two-handed melee weapon of your choice. A warhammer, a greatsword, a military pike, a battleaxe, etc. A heavy weapon has more reach and hits harder than a standard weapon. This might give you potency when the power or reach of the weapon is a factor.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 2
+      },
+      {
+        id: 'scary-weapon-or-tool',
+        name: 'Scary Weapon or Tool',
+        description:
+          'A scary-looking hand weapon or tool. This item grants increased effect when you intimidate, not increased harm in combat.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'manacles-and-chain',
+        name: 'Manacles & Chain',
+        description:
+          'A set of heavy manacles and chain, suitable for restraining a prisoner. A souvenir from a stay with the Bluecoats, perhaps?',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'rage-essence-vial',
+        name: 'Rage Essence Vial',
+        description:
+          'A single dose, which greatly enhances the user’s strength, resistance to pain, and irrational aggression for the span of several minutes. The GM will modify your position and effect accordingly when you fight on rage essence. Also, you suffer two consequences: “Can’t Tell Friend From Foe” and “Can’t Stop Until They’re All Broken.” You may resist these as usual.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      }
+    ];
+
+    this.items = this.items.concat(cutterItems);
   }
 }
 
@@ -653,6 +703,56 @@ export class Hound extends Character {
         maxQuantity: 3
       }
     ];
+
+    const houndItems: Item[] = [
+      {
+        id: 'fine-pair-of-pistols',
+        name: 'Fine Pair of Pistols',
+        description:
+          'A matched pair of handguns, made for greater accuracy, with double barrels that allow for two shots before reloading. Were your pistols made by Kardera’s Daughters, Templeton & Slane, the Imperial Forge, or some other gunsmith? How do they stand out from the average handgun?',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'fine-long-rifle',
+        name: 'Fine Long Rifle',
+        description:
+          'A finely crafted hunting rifle, deadly at long range, unwieldy in close quarters. Long rifles are usually illegal for private citizens in Doskvol, but you have (real or forged) military paperwork for this one.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 2
+      },
+      {
+        id: 'electroplasmic-ammunition',
+        name: 'Electroplasmic Ammunition',
+        description:
+          'A bandolier of electroplasmic ammo, especially potent against spirits, but less effective against physical targets. The electrical charge is enough to stun a person, but does very little real harm. Several hits might incapacitate a human target. This ammunition is especially reactive in the ghost field—make a 4-clock called “Attention from the Spirit Wardens” and tick it for every operation in which this ammo was used.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'trained-hunting-pet',
+        name: 'A Trained Hunting Pet',
+        description:
+          'Your animal companion obeys your commands and anticipates your actions. Cohort (Expert: Hunter).',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'spyglass',
+        name: 'Spyglass',
+        description:
+          'A brass tube with lenses that allow long-distance vision. Collapsible. May attach to a rifle.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      }
+    ];
+
+    this.items = this.items.concat(houndItems);
   }
 }
 
@@ -771,6 +871,56 @@ export class Leech extends Character {
         maxQuantity: 3
       }
     ];
+
+    const leechItems: Item[] = [
+      {
+        id: 'fine-tinkering-tools',
+        name: 'Fine Tinkering Tools',
+        description:
+          'A finely crafted set of tools for detailed mechanist work. A jeweler’s loupe. Measuring devices.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'fine-wrecking-tools',
+        name: 'Fine Wrecking Tools',
+        description:
+          'A specialized set of tools for sabotage and destruction. A small, powerful drill. A mallet and steel spikes. A prybar. An electroplasmic battery, clamps, wire. Vials of acid. A spark-torch cutter and fuel tank.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 2
+      },
+      {
+        id: 'blowgun-and-darts-syringes',
+        name: 'Blowgun & Darts, Syringes',
+        description:
+          'A small tube and darts that can be filled from alchemy flasks. Empty syringes.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'bandolier',
+        name: 'Bandolier',
+        description:
+          'A strap worn across the body, fitted with specially-padded pouches to hold three alchemical agents or spark-craft bombs. When you employ an alchemical or bomb from a bandolier, choose one from the list at right (or one of your custom-made formulas). During downtime, you automatically refill your bandoliers, so long as you have reasonable access to a supplier or workshop.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'gadgets',
+        name: 'Gadgets',
+        description:
+          'You may create gadgets during downtime by Tinkering with tools and materials. See Gadgets, page 227. Track the load for each gadget you deploy during an operation.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      }
+    ];
+
+    this.items = this.items.concat(leechItems);
   }
 }
 
@@ -889,6 +1039,56 @@ export class Lurk extends Character {
         maxQuantity: 3
       }
     ];
+
+    const lurkItems: Item[] = [
+      {
+        id: 'fine-lockpicks',
+        name: 'Fine Lockpicks',
+        description:
+          'A finely crafted set of tools to disable and circumvent locks.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'fine-shadow-cloak',
+        name: 'Fine Shadow Cloak',
+        description:
+          'A hooded cloak made of rare Iruvian shadow-silk that blends into the darkness around it. This item improves your effect level when you sneak around.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'light-climbing-gear',
+        name: 'Light Climbing Gear',
+        description:
+          'A well-crafted set of climbing gear that is less bulky and heavy than a standard set. Standard climbing gear is 2 load.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'silence-potion-vial',
+        name: 'Silence Potion Vial',
+        description:
+          'A vial of golden liquid that negates all sound within 10 paces of the drinker for a span of several moments.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'dark-sight-goggles',
+        name: 'Dark-sight Goggles',
+        description:
+          'An arcane device that allows the wearer to see in pitch darkness as if it were well-lit.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      }
+    ];
+
+    this.items = this.items.concat(lurkItems);
   }
 }
 
@@ -1005,6 +1205,56 @@ export class Slide extends Character {
         maxQuantity: 3
       }
     ];
+
+    const slideItems: Item[] = [
+      {
+        id: 'fine-clothes-and-jewelry',
+        name: 'Fine Clothes & Jewelry',
+        description:
+          'An outfit that appears to be of such fine make as to pass you off as a wealthy noble. If you’re carrying this item as a second outfit to change into, it counts as 2 load.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'fine-disguise-kit',
+        name: 'Fine Disguise Kit',
+        description:
+          'A theatrical make-up kit equipped with an impressive array of expert appliances to fool the eye. The fine quality of this kit may increase the effect of your deceptive actions when you use it.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'fine-loaded-dice-trick-cards',
+        name: 'Fine Loaded Dice, Trick Cards',
+        description:
+          'Gambling accouterments subtly altered to favor particular outcomes. The fine quality of this kit may increase the effect of your deceptive actions when you use it.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'trance-powder',
+        name: 'Trance Powder',
+        description:
+          'A dose of the popular drug, which induces an altered mental state. The victim of this powder is not fully unconscious, but rather retreats into a calm, suggestible mental state, similar to hypnotism.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'cane-sword',
+        name: 'Cane-Sword',
+        description:
+          'A slim sword and its sheath, disguised as a noble’s cane. The disguise will fool a cursory inspection.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      }
+    ];
+
+    this.items = this.items.concat(slideItems);
   }
 }
 
@@ -1123,6 +1373,56 @@ export class Spider extends Character {
         maxQuantity: 3
       }
     ];
+
+    const spiderItems: Item[] = [
+      {
+        id: 'fine-cover-identity',
+        name: 'Fine Cover Identity',
+        description:
+          'Paperwork, planted stories and rumors, and false relationships sufficient to pass as a different person.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'fine-bottle-of-whiskey',
+        name: 'Fine Bottle of Whiskey',
+        description:
+          'A rare distillation from your personal collection, potent both in its alcohol and its ability to impress.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'blueprints',
+        name: 'Blueprints',
+        description:
+          'A folio of useful architectural drawings and city plans. Feel free to specify which plans you’re carrying when you choose this item.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'vial-of-slumber-essence',
+        name: 'Vial of Slumber Essence',
+        description:
+          'A dose of slumber essence sufficient to put someone to sleep for an hour. The victim’s sleep isn’t supernatural, but it is deep—they can be roused with some effort.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'concealed-palm-pistol',
+        name: 'Concealed Palm Pistol',
+        description:
+          'A small firearm with a weak charge, easily concealed in a sleeve or waistcoat. This pistol has extremely limited range; only a few feet. It’s very difficult to detect on your person, even if you’re searched.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      }
+    ];
+
+    this.items = this.items.concat(spiderItems);
   }
 }
 
@@ -1241,6 +1541,55 @@ export class Whisper extends Character {
         maxQuantity: 3
       }
     ];
+
+    const whisperItems: Item[] = [
+      {
+        id: 'fine-lightning-hook',
+        name: 'Fine Lightning Hook',
+        description:
+          'A long, two-handed pole with a loop of heavy wire at the end, connected to an electroplasmic capacitor. Suitable for grappling a spirit and dragging it into a spirit bottle. This custom-made hook collapses into a compact form, thus reducing its load to 1, even though it’s two-handed.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'fine-spirit-mask',
+        name: 'Fine Spirit Mask',
+        description:
+          'An arcane item that allows the trained user to see supernatural energies in great detail. Also affords some measure of protection against ghostly possession. Each spirit mask is unique. What does yours look like? What makes it strange and disturbing to see?',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 1
+      },
+      {
+        id: 'spirit-bottles',
+        name: 'Spirit Bottles (2)',
+        description:
+          'An arcane device used to trap a spirit. A metal and crystalline cylinder, the size of a loaf of bread.',
+        quantity: 0,
+        maxQuantity: 2,
+        load: 1
+      },
+      {
+        id: 'ghost-key',
+        name: 'Ghost Key',
+        description:
+          'An arcane device that can open ghost doors. There’s an echo of the entire city, across the ages, trapped in the ghost field. Sometimes a door to that place can be found.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      },
+      {
+        id: 'demonbane-charm',
+        name: 'Demonbane Charm',
+        description: 'An arcane trinket that demons prefer to avoid.',
+        quantity: 0,
+        maxQuantity: 1,
+        load: 0
+      }
+    ];
+
+    this.items = this.items.concat(whisperItems);
   }
 }
 
@@ -1600,6 +1949,9 @@ export class Vampire extends Character {
         maxQuantity: 3
       }
     ];
+
+    const vampireItems: Item[] = []; // todo
+    this.items = this.items.concat(vampireItems);
   }
 }
 
